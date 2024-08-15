@@ -1,5 +1,5 @@
 @extends('layout.auth')
-
+@section('title') Sign In @endsection
 @section('content')
 <!-- Content -->
 <div class="container-xxl">
@@ -8,24 +8,39 @@
       <div class="card">
          <div class="card-body">
             <h4 class="mb-2">Welcome to Admin Panel</h4>
-            <p class="mb-4">Please sign-in to your account and start the adventure</p>
-            <form id="formAuthentication" class="mb-3" action="" method="POST">
+            <p class="mb-4">Please sign-in to your account</p>
+            <form id="login" class="mb-3" action=" {{ route('login')}}" method="POST">
+               @csrf
+               @method('POST')
                <div class="mb-3">
-                  <label for="email" class="form-label">Email or Username</label>
-                  <input type="text" class="form-control" id="email" name="email-username" placeholder="Enter your email or username" autofocus>
+                  <label for="email" class="form-label">Email</label>
+                  <input type="text" class="form-control" id="email" name="email" placeholder="Enter your email" autofocus value="{{ old('email')}}">
+                     <div class="text-danger">@error('email'){{$message}}@enderror</div>
                </div>
-               <div class="mb-3 form-password-toggle">
+
+               <!-- <di class="mb-3">
+                  <label class="form-label" for="password">Password</label>
+                  <input type="password" id="password" class="form-control" value="password">
+                  <i class="toggle-password fa fa-fw fa-eye-slash"></i>
+               </div> -->
+
+               <div class="mb-3">
                   <div class="d-flex justify-content-between">
                      <label class="form-label" for="password">Password</label>
                      <a href="auth-forgot-password-basic.html">
                      <small>Forgot Password?</small>
                      </a>
                   </div>
-                  <div class="input-group input-group-merge">
-                     <input type="password" id="password" class="form-control" name="password" placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;" aria-describedby="password" />
-                     <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
+                  <div>
+                     <div class="input-group input-group-merge">
+                        <input type="password" id="password" class="form-control" name="password" aria-describedby="password" value="{{ old('password') }}"/>
+                        <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
+                     </div>
                   </div>
+               
+                  <div id="password-error" class="text-danger"></div>
                </div>
+
                <!-- <div class="mb-3">
                   <div class="form-check">
                      <input class="form-check-input" type="checkbox" id="remember-me">
@@ -40,7 +55,7 @@
             </form>
             <p class="text-center">
                <span>New on our platform?</span>
-               <a href="auth-register-basic.html">
+               <a href="{{ route('signUp')}}">
                <span>Create an account</span>
                </a>
             </p>
@@ -52,4 +67,49 @@
    </div>
 </div>
 <!-- / Content -->
+@endsection
+
+@section('scripts')
+<script>
+   $(document).ready(function(){
+      $('#login').validate({
+         rules : {
+            email : {
+               required : true,
+               email : true
+            },
+            password: {
+               required: true,
+               minlength: 6
+            },
+         },
+         messages: {
+            email: {
+              required: "Email is required",
+            },
+            password: {
+               required :'Password is required',
+               minlength: 'Password must be at least 6 characters long'
+            },
+            errorPlacement: function(error, element) {
+               if (element.attr("id") === "password") {
+                  error.appendTo("#password-error");
+                  console.log('sss');
+                  console.log(error);
+                  console.log($(element));
+                  $('#password-error').text(error)
+                  // error.insertAfter($(element).parents('div').prev($('.question')));
+               } else {
+                  error.insertAfter(element);
+                  console.log('shkhh');
+               }
+               
+            },
+            submitHandler: function(form){
+               form.submit();
+            }
+        },
+      })
+   });
+</script>
 @endsection

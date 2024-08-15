@@ -3,8 +3,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="csrf-token" content="{{csrf_token()}}">
 <meta name="base_url" content="{{url('/')}}">
-
-<title>Ecommerce</title>
+<title>@yield('title', 'Inventory Management')</title>
 
 <!-- Favicon -->
 <!-- <link rel="icon" type="image/x-icon" href="{{ asset('assets/img/favicon/favicon.ico') }}" /> -->
@@ -27,13 +26,35 @@
 <!-- Vendors CSS -->
 <link rel="stylesheet" href="{{asset('assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css')}}" />
 <link rel="stylesheet" href="{{asset('assets/vendor/libs/typeahead-js/typeahead.css')}}" />
+<link rel="stylesheet" href="{{ asset('assets/vendor/libs/select2/select2.css') }}" />
 <!-- Vendor -->
 <link rel="stylesheet" href="{{asset('assets/vendor/libs/form-validation/umd/styles/index.min.css')}}" />
+<link rel="stylesheet" href="{{ asset('assets/vendor/libs/bootstrap-datepicker/bootstrap-datepicker.css') }}" />
 
 <!-- Page CSS -->
 <!-- Page -->
 <link rel="stylesheet" href="{{asset('assets/vendor/css/pages/page-auth.css')}}">
 <link rel="stylesheet" href="{{asset('assets/vendor/css/pages/toastr.min.css')}}">
+
+<style>
+    @media (min-width: 1400px) {
+    .container-xxl, .container-xl, .container-lg, .container-md, .container-sm, .container {
+        max-width: 98% !important;
+    }
+}
+</style>
+
+<style>
+    .input-group>:not(:first-child):not(.dropdown-menu):not(.valid-tooltip):not(.valid-feedback):not(.invalid-tooltip):not(.invalid-feedback){
+        /* margin-left: -1px;
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0; */
+
+        margin-left: 0 !important;
+        border-top-left-radius: 0.25rem !important; /* or any desired value */
+        border-bottom-left-radius: 0.25rem !important; /* or any desired value */
+    }
+</style>
 
 <!-- Helpers -->
 

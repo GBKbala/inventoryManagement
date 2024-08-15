@@ -32,168 +32,56 @@ toastr.options = {
     "hideMethod": "fadeOut"
 }
 
-$.ajaxSetup({
-    headers: {
-        'Authorization': 'Bearer ' + localStorage.getItem('access_token') 
-    }
+
+const indianStates = [
+    {"value": "AP", "label": "Andhra Pradesh"},
+    {"value": "AR", "label": "Arunachal Pradesh"},
+    {"value": "AS", "label": "Assam"},
+    {"value": "BR", "label": "Bihar"},
+    {"value": "CT", "label": "Chhattisgarh"},
+    {"value": "GA", "label": "Goa"},
+    {"value": "GJ", "label": "Gujarat"},
+    {"value": "HR", "label": "Haryana"},
+    {"value": "HP", "label": "Himachal Pradesh"},
+    {"value": "JK", "label": "Jammu and Kashmir"},
+    {"value": "JH", "label": "Jharkhand"},
+    {"value": "KA", "label": "Karnataka"},
+    {"value": "KL", "label": "Kerala"},
+    {"value": "MP", "label": "Madhya Pradesh"},
+    {"value": "MH", "label": "Maharashtra"},
+    {"value": "MN", "label": "Manipur"},
+    {"value": "ML", "label": "Meghalaya"},
+    {"value": "MZ", "label": "Mizoram"},
+    {"value": "NL", "label": "Nagaland"},
+    {"value": "OD", "label": "Odisha"},
+    {"value": "PB", "label": "Punjab"},
+    {"value": "RJ", "label": "Rajasthan"},
+    {"value": "SK", "label": "Sikkim"},
+    {"value": "TN", "label": "Tamil Nadu"},
+    {"value": "TG", "label": "Telangana"},
+    {"value": "TR", "label": "Tripura"},
+    {"value": "UP", "label": "Uttar Pradesh"},
+    {"value": "UT", "label": "Uttarakhand"},
+    {"value": "WB", "label": "West Bengal"}
+];
+
+$(document).ready(function() {
+    indianStates.forEach(function(state) {
+        $('#state').append($('<option></option>').attr('value', state.value).text(state.label));
+    });
+
+    $('#state').select2({
+        placeholder: "Select a state",
+        allowClear: true
+    });
 });
 
-
-$(document).ready(function(){
-    $('#login').submit(function(e){
-        e.preventDefault();
-    }).validate({
-        rules: {
-            email_username:{
-            required: true,
-        },
-          password: {
-            required: true,
-            minlength: 8
-          },
-        },
-        messages: {
-            email_username: {
-              required: "Enter your email address or username",
-            },
-            password: {
-                required :'Enter your password',
-                minlength: 'Password must be at least 8 characters long'
-            }
-        },
-        submitHandler: function(form) {
-            var form = $('#login')[0];
-            var formData = new FormData(form);
-            $.ajax({
-                url: form.action,
-                method: "POST",
-                data: formData,
-                processData: false,
-                contentType: false,
-                success: function(data) {
-                    console.log(data);
-                    $('#login')[0].reset();
-                    toastr.success(data.message);
-                    localStorage.setItem('access_token',data.authorisation.token);
-                    // Cookies.set('access_token', data.authorisation.token);
-                    document.cookie = "access_token=" + data.authorisation.token;
-    
-                    setTimeout(function () {
-                        window.location.href=$('meta[name="base_url"]').attr('content')+'/dashboard';
-                    }, 2000);
-                },
-                error: function(xhr, status, error){
-                    $('.errors').html("");
-                    console.log(xhr.responseJSON);
-                    // toastr.error(xhr.responseJSON.message);
-                    $.each(xhr.responseJSON.errors, function (key, element)
-                    {
-                        $("."+key).append("<span class='text-danger'>"+element+"</span>")
-                    });
-                }
-            });
-        }
+$(document).ready(function() {
+    $('#dob').datepicker({
+        format: 'dd-mm-yyyy',
+        autoclose: true,
+        todayHighlight: true
     });
 });
 
 
-$(document).ready(function(){
-    $('#register').submit(function(e){
-        e.preventDefault();
-    }).validate({
-        rules: {
-            firstname:{
-                required: true,
-            },
-            lastname:{
-                required: true,
-            },
-            username:{
-                required: true,
-            },
-            email:{
-                required: true,
-            },
-            password: {
-                required: true,
-                minlength: 8
-            },
-            password_confirmation: {
-                minlength: 8,
-                equalTo: "#password"
-            },
-            phone: {
-                required: true,
-                minlength: 10,
-            },
-            terms: {
-                required: true,
-            },
-        },
-        messages: {
-            firstname:{
-                required: "Enter your firstname",
-            },
-            lastname:{
-                required: "Enter your lastname",
-            },
-            username:{
-                required: "Enter your username",
-            },
-            email: {
-              required: "Enter your email",
-            },
-            password: {
-                required :'Enter your password',
-                minlength: 'Password must be at least 8 characters long'
-            },
-            password_confirmation: {
-                minlength: 'Password must be at least 8 characters long',
-                equalTo: "Password mismatch"
-            },
-            phone: {
-                required: "Enter your phone number",
-                minlength: "Enter a valid phone number",
-            },
-            terms: {
-                required: "Agree terms & conditions",
-            },
-        },
-        errorPlacement: function(error, element) {
-            if (element.attr("name") == "terms") {
-              error.insertAfter("#terms-error");
-            } else {
-              error.insertAfter(element);
-            }
-        },
-        submitHandler: function(form) {
-            // form.submit();
-            var form = $('#register')[0];
-            var formData = new FormData(form);
-            $.ajax({
-                url: form.action,
-                method: "POST",
-                data: formData,
-                processData: false,
-                contentType: false,
-                success: function(data) {
-                    console.log(data);
-                    $('#register')[0].reset();
-                    toastr.success(data.message);
-                    setTimeout(function () {
-                        window.location.href=$('meta[name="base_url"]').attr('content');
-                    }, 3000);
-                },
-                error: function(xhr, status, error){
-                    $('.errors').html("");
-                    console.log(xhr.responseJSON);
-                    // toastr.error(xhr.responseJSON.message);
-                    $.each(xhr.responseJSON.errors, function (key, element)
-                    {
-                        $("."+key).append("<span class='text-danger'>"+element+"</span>")
-                    });
-                }
-            });
-        }
-    });
-});
