@@ -13,6 +13,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+
+Route::get('/dash', function(){
+    return view('dashboard');
+});
+
+Route::get('/login', function(){
+    return view('auth.signIn');
+});
+
+Route::get('/productList', function () {
+    return view('items.index');
 });
