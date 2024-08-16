@@ -5,9 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class InventoryItems extends Model
+class InventoryItem extends Model
 {
     use HasFactory;
+
     protected $table = "inventory_items";
 
     protected $fillable = [
@@ -18,4 +19,5 @@ class InventoryItems extends Model
     ];
 
     public $timestamps = false;
+
 }

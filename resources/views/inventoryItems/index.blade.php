@@ -35,16 +35,18 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>Example Item</td>
-                                <td>Example Description</td>
-                                <td>100</td>
-                                <td>$50.00</td>
-                                <td>
-                                    <button class="btn btn-warning btn-sm edit-btn" data-id="22">Edit</button>
-                                    <button class="btn btn-danger btn-sm delete-btn" data-id="22">Delete</button>
-                                </td>
-                            </tr>
+                            @foreach($inevntoryItems as $key=> $item )
+                                <tr>
+                                    <td>{{ $item->name}}</td>
+                                    <td>{{ $item->description}}</td>
+                                    <td>{{ $item->quantity_in_stock}}</td>
+                                    <td>${{ $item->price}}</td>
+                                    <td>
+                                        <button class="btn btn-warning btn-sm edit-btn" data-id="{{ $item->id}}">Edit</button>
+                                        <button class="btn btn-danger btn-sm delete-btn" data-id="{{ $item->id}}">Delete</button>
+                                    </td>
+                                </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>
