@@ -36,10 +36,20 @@
                         <input type="password" id="password" class="form-control" name="password" aria-describedby="password" value="{{ old('password') }}"/>
                         <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
                      </div>
+                     <div id="password-error" class="text-danger"></div>
                   </div>
-               
-                  <div id="password-error" class="text-danger"></div>
+            
                </div>
+
+               <!-- <div class="mb-3 form-password-toggle">
+                  <label class="form-label" for="password">Password</label>
+                  <div class="input-group input-group-merge">
+                     <input type="password" id="password" name="password" class="form-control" placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;" aria-describedby="multiStepsPass2" value="{{ old('password') }}" />
+                     <span class="input-group-text cursor-pointer" id="multiStepsPass2"><i class="bx bx-hide"></i></span>
+                  </div>
+                  @error('password')<div class="text-danger">{{ $message }}</div>@enderror
+                  <div id="password-error" class="text-danger"></div>
+               </div> -->
 
                <!-- <div class="mb-3">
                   <div class="form-check">
@@ -92,18 +102,13 @@
                minlength: 'Password must be at least 6 characters long'
             },
             errorPlacement: function(error, element) {
-               if (element.attr("id") === "password") {
-                  error.appendTo("#password-error");
-                  console.log('sss');
-                  console.log(error);
-                  console.log($(element));
-                  $('#password-error').text(error)
-                  // error.insertAfter($(element).parents('div').prev($('.question')));
+               if (element.attr("name") == "terms") {
+                  error.appendTo("#terms-error");
+               }else if (element.attr("name") === "password") {
+                  error.appendTo("#password-error")
                } else {
                   error.insertAfter(element);
-                  console.log('shkhh');
                }
-               
             },
             submitHandler: function(form){
                form.submit();
