@@ -40,3 +40,5 @@ Route::get('/dashboard', [AuthController::class,'dashboard'])->name('dashboard')
 Route::get('/itemList',[InventoryItemController::class, 'index'])->name('itemList');
 Route::get('addItem',[InventoryItemController::class,'add'])->name('addItem');
 Route::post('storeItem',[InventoryItemController::class,'store'])->name('storeItem');
+Route::get('/editItem/{id}', [InventoryItemController::class,'edit'])->name('editItem');
+Route::put('/updateItem/{id}',[InventoryItemController::class,'update'])->name('updateItem');

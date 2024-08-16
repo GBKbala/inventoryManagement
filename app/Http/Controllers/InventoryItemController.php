@@ -36,4 +36,31 @@ class InventoryItemController extends Controller
             return back()->with('error', 'An error occurred');
         }
     }
+
+    public function edit($id){
+        $inevntoryItem = InventoryItem::find($id);
+        return view('inventoryItems.edit', compact('inevntoryItem'));
+    }
+
+    public function update(Request $request, $id){
+        $validated = $request->validate([
+            'name' => 'required',
+            'description' => 'required',
+            'quantity_in_stock' => 'required',
+            'price' => 'required'
+        ]);
+        try {
+            $item = InventoryItem::find($id);
+            $itemUpdate = $item->update($validated);
+            if ($itemUpdate) {
+                return redirect('itemList')->with('success', 'Item updated successfully');
+            }else{
+                return back()->with('error', 'Unable to update item');
+            }
+    
+        }catch (\Exception $e) {
+            // dd($e->getMessage());
+            return back()->with('error', 'An error occurred');
+        }
+    }
 }

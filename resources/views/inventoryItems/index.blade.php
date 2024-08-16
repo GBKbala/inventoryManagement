@@ -42,8 +42,8 @@
                                     <td>{{ $item->quantity_in_stock}}</td>
                                     <td>${{ $item->price}}</td>
                                     <td>
-                                        <button class="btn btn-warning btn-sm edit-btn" data-id="{{ $item->id}}">Edit</button>
-                                        <button class="btn btn-danger btn-sm delete-btn" data-id="{{ $item->id}}">Delete</button>
+                                        <a href="{{ route('editItem',$item->id) }}"><button class="btn btn-warning btn-sm edit-btn" data-id="{{ $item->id}}">Edit</button></a>
+                                        <a href=""><button class="btn btn-danger btn-sm delete-btn" data-id="{{ $item->id}}">Delete</button></a>
                                     </td>
                                 </tr>
                             @endforeach
@@ -95,22 +95,19 @@
             table.button('.buttons-excel').trigger();
         });
 
-        // Handle Edit Button Click
-        $(document).on('click', '.edit-btn', function () {
-            var id = $(this).data('id');
-            // Perform edit action, e.g., open a modal or redirect to an edit page
-            alert('Edit button clicked for ID: ' + id);
-        });
+     
+        // $(document).on('click', '.edit-btn', function () {
+        //     var id = $(this).data('id');
+        //     alert('Edit button clicked for ID: ' + id);
+        // });
 
-        // Handle Delete Button Click
-        $(document).on('click', '.delete-btn', function () {
-            var id = $(this).data('id');
-            // Confirm and perform delete action
-            if (confirm('Are you sure you want to delete item with ID: ' + id + '?')) {
-                // Perform delete action, e.g., send an AJAX request
-                alert('Delete button clicked for ID: ' + id);
-            }
-        });
+        
+        // $(document).on('click', '.delete-btn', function () {
+        //     var id = $(this).data('id');
+        //     if (confirm('Are you sure you want to delete item with ID: ' + id + '?')) {
+        //         alert('Delete button clicked for ID: ' + id);
+        //     }
+        // });
     });
 </script>
 @endsection
