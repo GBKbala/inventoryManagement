@@ -59,7 +59,6 @@ class InventoryItemController extends Controller
             }
     
         }catch (\Exception $e) {
-            // dd($e->getMessage());
             return back()->with('error', 'An error occurred');
         }
     }
