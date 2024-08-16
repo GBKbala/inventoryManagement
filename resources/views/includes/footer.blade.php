@@ -18,7 +18,6 @@
 <script src="{{ asset('assets/vendor/libs/datatables-bs5/datatables-bootstrap5.js') }}"></script>
 
 <script src="{{ asset('assets/vendor/libs/sweetalert2/sweetalert2.js') }}"></script>
-<script src="{{ asset('assets/js/extended-ui-sweetalert2.js') }}"></script>
 
 
 <!-- endbuild -->

@@ -18,6 +18,4 @@ class InventoryItem extends Model
         'price'
     ];
 
-    public $timestamps = false;
-
 }

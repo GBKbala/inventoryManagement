@@ -62,4 +62,19 @@ class InventoryItemController extends Controller
             return back()->with('error', 'An error occurred');
         }
     }
+
+    public function destroy(Request $request, $id){
+        try {
+            $item = InventoryItem::findOrFail($id);
+            $itemDelete = $item->delete();
+            if ($itemDelete) {
+                return redirect('itemList')->with('success', 'Item deleted successfully');
+            } else {
+                return redirect('itemList')->with('error', 'Unable to Delete item');
+            }
+        }catch (\Exception $e) {
+            return redirect('itemList')->with('error', 'An error occurred');
+        }
+    }
+
 }

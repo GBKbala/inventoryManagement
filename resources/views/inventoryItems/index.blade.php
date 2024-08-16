@@ -4,6 +4,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
 <script src="https://cdn.datatables.net/buttons/1.7.2/js/buttons.html5.min.js"></script>
 
+
 @section('content')
     <div class="container-xxl flex-grow-1 container-p-y">
         <!-- Product List Table -->
@@ -30,7 +31,7 @@
                                 <th>Name</th>
                                 <th>Description</th>
                                 <th>Quantity</th>
-                                <th>Price</th>
+                                <th>Price ₹</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -40,10 +41,10 @@
                                     <td>{{ $item->name}}</td>
                                     <td>{{ $item->description}}</td>
                                     <td>{{ $item->quantity_in_stock}}</td>
-                                    <td>${{ $item->price}}</td>
+                                    <td>{{ $item->price}}</td>
                                     <td>
-                                        <a href="{{ route('editItem',$item->id) }}"><button class="btn btn-warning btn-sm edit-btn" data-id="{{ $item->id}}">Edit</button></a>
-                                        <a href=""><button class="btn btn-danger btn-sm delete-btn" data-id="{{ $item->id}}">Delete</button></a>
+                                        <a href="{{ route('editItem',$item->id) }}" class="btn btn-warning btn-sm edit-btn" data-id="{{ $item->id}}">Edit</a>
+                                        <a href="{{ route('deleteItem',$item->id) }}" class="btn btn-danger btn-sm delete-btn" data-id="{{ $item->id}}" onclick="confirmation(event)">Delete</a>
                                     </td>
                                 </tr>
                             @endforeach
@@ -57,7 +58,27 @@
 
 @section('scripts')
 <script>
-       $(document).ready(function () {
+   
+    function confirmation(ev) {
+        ev.preventDefault();
+        var urlToRedirect = ev.currentTarget.getAttribute('href');  
+        // console.log(urlToRedirect); 
+        Swal.fire({
+            title: "Are you sure?",
+            text: "Once deleted, you will not be able to recover this item!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: "#DD6B55",
+            confirmButtonText: "Yes, delete it!",
+            cancelButtonText: "No, cancel please!",
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = urlToRedirect;
+            }
+        });
+    }
+
+    $(document).ready(function () {
             var table = $('#inventoryItems').DataTable({
                 responsive: true,
                 pageLength: 50,
