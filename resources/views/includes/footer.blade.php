@@ -15,6 +15,7 @@
 <script src="{{ asset('assets/vendor/js/template-customizer.js') }}"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/js-cookie/2.0.4/js.cookie.min.js"></script>
 <script src="{{asset('assets/vendor/libs/bootstrap-datepicker/bootstrap-datepicker.js') }}"></script>
+<script src="{{ asset('assets/vendor/libs/datatables-bs5/datatables-bootstrap5.js') }}"></script>
 
 
 <!-- endbuild -->

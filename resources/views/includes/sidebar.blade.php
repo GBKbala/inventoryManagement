@@ -20,37 +20,29 @@
          </li>
          
          <!-- e-commerce-app menu start -->
-         <li class="menu-item">
+         <li class="menu-item open">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
                <i class='menu-icon tf-icons bx bx-cart-alt'></i>
-               <div class="text-truncate" data-i18n="eCommerce">eCommerce</div>
+               <div class="text-truncate" data-i18n="eCommerce">Inventory Items</div>
             </a>
             <ul class="menu-sub">
-               <li class="menu-item">
-                  <a href="app-ecommerce-dashboard.html" class="menu-link">
-                     <div class="text-truncate" data-i18n="Dashboard">Dashboard</div>
-                  </a>
-               </li>
+            
                <li class="menu-item">
                   <a href="javascript:void(0);" class="menu-link menu-toggle">
-                     <div class="text-truncate" data-i18n="Products">Products</div>
+                     <div class="text-truncate" data-i18n="Products">Items</div>
                   </a>
                   <ul class="menu-sub">
                      <li class="menu-item">
-                        <a href="app-ecommerce-product-list.html" class="menu-link">
-                           <div class="text-truncate" data-i18n="Product list">Product list</div>
+                        <a href="{{ route('itemList') }}" class="menu-link">
+                           <div class="text-truncate" data-i18n="Product list">Items list</div>
                         </a>
                      </li>
                      <li class="menu-item">
                         <a href="app-ecommerce-product-add.html" class="menu-link">
-                           <div class="text-truncate" data-i18n="Add Product">Add Product</div>
+                           <div class="text-truncate" data-i18n="Add Product">Add Item</div>
                         </a>
                      </li>
-                     <li class="menu-item">
-                        <a href="app-ecommerce-category-list.html" class="menu-link">
-                           <div class="text-truncate" data-i18n="Category list">Category List</div>
-                        </a>
-                     </li>
+
                   </ul>
                </li>
                <li class="menu-item">
@@ -109,99 +101,12 @@
                      </li>
                   </ul>
                </li>
-               <li class="menu-item">
-                  <a href="app-ecommerce-manage-reviews.html" class="menu-link">
-                     <div class="text-truncate" data-i18n="Manage reviews">Manage reviews</div>
-                  </a>
-               </li>
-               <li class="menu-item">
-                  <a href="app-ecommerce-referral.html" class="menu-link">
-                     <div class="text-truncate" data-i18n="Referrals">Referrals</div>
-                  </a>
-               </li>
-               <li class="menu-item">
-                  <a href="javascript:void(0);" class="menu-link menu-toggle">
-                     <div class="text-truncate" data-i18n="Settings">Settings</div>
-                  </a>
-                  <ul class="menu-sub">
-                     <li class="menu-item">
-                        <a href="app-ecommerce-settings-detail.html" class="menu-link">
-                           <div class="text-truncate" data-i18n="Store details">Store details</div>
-                        </a>
-                     </li>
-                     <li class="menu-item">
-                        <a href="app-ecommerce-settings-payments.html" class="menu-link">
-                           <div class="text-truncate" data-i18n="Payments">Payments</div>
-                        </a>
-                     </li>
-                     <li class="menu-item">
-                        <a href="app-ecommerce-settings-checkout.html" class="menu-link">
-                           <div class="text-truncate" data-i18n="Checkout">Checkout</div>
-                        </a>
-                     </li>
-                     <li class="menu-item">
-                        <a href="app-ecommerce-settings-shipping.html" class="menu-link">
-                           <div class="text-truncate" data-i18n="Shipping & delivery">Shipping & delivery</div>
-                        </a>
-                     </li>
-                     <li class="menu-item">
-                        <a href="app-ecommerce-settings-locations.html" class="menu-link">
-                           <div class="text-truncate" data-i18n="Locations">Locations</div>
-                        </a>
-                     </li>
-                     <li class="menu-item">
-                        <a href="app-ecommerce-settings-notifications.html" class="menu-link">
-                           <div class="text-truncate" data-i18n="Notifications">Notifications</div>
-                        </a>
-                     </li>
-                  </ul>
-               </li>
+              
             </ul>
          </li>
          <!-- e-commerce-app menu end -->
-         <!-- Academy menu start -->
-         <li class="menu-item">
-            <a href="javascript:void(0);" class="menu-link menu-toggle">
-               <i class='menu-icon tf-icons bx bx-book-open'></i>
-               <div class="text-truncate" data-i18n="Academy">Academy</div>
-            </a>
-            <ul class="menu-sub">
-               <li class="menu-item">
-                  <a href="app-academy-dashboard.html" class="menu-link">
-                     <div class="text-truncate" data-i18n="Dashboard">Dashboard</div>
-                  </a>
-               </li>
-               <li class="menu-item">
-                  <a href="app-academy-course.html" class="menu-link">
-                     <div class="text-truncate" data-i18n="My Course">My Course</div>
-                  </a>
-               </li>
-               <li class="menu-item">
-                  <a href="app-academy-course-details.html" class="menu-link">
-                     <div class="text-truncate" data-i18n="Course Details">Course Details</div>
-                  </a>
-               </li>
-            </ul>
-         </li>
-         <!-- Academy menu end -->
-         <li class="menu-item">
-            <a href="javascript:void(0);" class="menu-link menu-toggle">
-               <i class='menu-icon tf-icons bx bx-car'></i>
-               <div class="text-truncate" data-i18n="Logistics">Logistics</div>
-            </a>
-            <ul class="menu-sub">
-               <li class="menu-item">
-                  <a href="app-logistics-dashboard.html" class="menu-link">
-                     <div class="text-truncate" data-i18n="Dashboard">Dashboard</div>
-                  </a>
-               </li>
-               <li class="menu-item">
-                  <a href="app-logistics-fleet.html" class="menu-link">
-                     <div class="text-truncate" data-i18n="Fleet">Fleet</div>
-                  </a>
-               </li>
-            </ul>
-         </li>
+        
+        
          <li class="menu-item">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
                <i class='menu-icon tf-icons bx bx-food-menu'></i>
@@ -293,110 +198,7 @@
                </li>
             </ul>
          </li>
-         <li class="menu-item">
-            <a href="javascript:void(0);" class="menu-link menu-toggle">
-               <i class="menu-icon tf-icons bx bx-dock-top"></i>
-               <div class="text-truncate" data-i18n="Pages">Pages</div>
-            </a>
-            <ul class="menu-sub">
-               <li class="menu-item">
-                  <a href="javascript:void(0);" class="menu-link menu-toggle">
-                     <div class="text-truncate" data-i18n="User Profile">User Profile</div>
-                  </a>
-                  <ul class="menu-sub">
-                     <li class="menu-item">
-                        <a href="pages-profile-user.html" class="menu-link">
-                           <div class="text-truncate" data-i18n="Profile">Profile</div>
-                        </a>
-                     </li>
-                     <li class="menu-item">
-                        <a href="pages-profile-teams.html" class="menu-link">
-                           <div class="text-truncate" data-i18n="Teams">Teams</div>
-                        </a>
-                     </li>
-                     <li class="menu-item">
-                        <a href="pages-profile-projects.html" class="menu-link">
-                           <div class="text-truncate" data-i18n="Projects">Projects</div>
-                        </a>
-                     </li>
-                     <li class="menu-item">
-                        <a href="pages-profile-connections.html" class="menu-link">
-                           <div class="text-truncate" data-i18n="Connections">Connections</div>
-                        </a>
-                     </li>
-                  </ul>
-               </li>
-               <li class="menu-item">
-                  <a href="javascript:void(0);" class="menu-link menu-toggle">
-                     <div class="text-truncate" data-i18n="Account Settings">Account Settings</div>
-                  </a>
-                  <ul class="menu-sub">
-                     <li class="menu-item">
-                        <a href="pages-account-settings-account.html" class="menu-link">
-                           <div class="text-truncate" data-i18n="Account">Account</div>
-                        </a>
-                     </li>
-                     <li class="menu-item">
-                        <a href="pages-account-settings-security.html" class="menu-link">
-                           <div class="text-truncate" data-i18n="Security">Security</div>
-                        </a>
-                     </li>
-                     <li class="menu-item">
-                        <a href="pages-account-settings-billing.html" class="menu-link">
-                           <div class="text-truncate" data-i18n="Billing & Plans">Billing & Plans</div>
-                        </a>
-                     </li>
-                     <li class="menu-item">
-                        <a href="pages-account-settings-notifications.html" class="menu-link">
-                           <div class="text-truncate" data-i18n="Notifications">Notifications</div>
-                        </a>
-                     </li>
-                     <li class="menu-item">
-                        <a href="pages-account-settings-connections.html" class="menu-link">
-                           <div class="text-truncate" data-i18n="Connections">Connections</div>
-                        </a>
-                     </li>
-                  </ul>
-               </li>
-               <li class="menu-item">
-                  <a href="pages-faq.html" class="menu-link">
-                     <div class="text-truncate" data-i18n="FAQ">FAQ</div>
-                  </a>
-               </li>
-               <li class="menu-item">
-                  <a href="pages-pricing.html" class="menu-link">
-                     <div class="text-truncate" data-i18n="Pricing">Pricing</div>
-                  </a>
-               </li>
-               <li class="menu-item">
-                  <a href="javascript:void(0);" class="menu-link menu-toggle">
-                     <div class="text-truncate" data-i18n="Misc">Misc</div>
-                  </a>
-                  <ul class="menu-sub">
-                     <li class="menu-item">
-                        <a href="pages-misc-error.html" class="menu-link" target="_blank">
-                           <div class="text-truncate" data-i18n="Error">Error</div>
-                        </a>
-                     </li>
-                     <li class="menu-item">
-                        <a href="pages-misc-under-maintenance.html" class="menu-link" target="_blank">
-                           <div class="text-truncate" data-i18n="Under Maintenance">Under Maintenance</div>
-                        </a>
-                     </li>
-                     <li class="menu-item">
-                        <a href="pages-misc-comingsoon.html" class="menu-link" target="_blank">
-                           <div class="text-truncate" data-i18n="Coming Soon">Coming Soon</div>
-                        </a>
-                     </li>
-                     <li class="menu-item">
-                        <a href="pages-misc-not-authorized.html" class="menu-link" target="_blank">
-                           <div class="text-truncate" data-i18n="Not Authorized">Not Authorized</div>
-                        </a>
-                     </li>
-                  </ul>
-               </li>
-            </ul>
-         </li>
+        
          
 
          

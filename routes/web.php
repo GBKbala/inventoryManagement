@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\InventoryItemController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,3 +29,11 @@ Route::post('/login', [AuthController:: class, 'login'])->name('login');
 Route::get('/signUp', [AuthController::class, 'signUp'])->name('signUp');
 Route::post('/register',[AuthController::class,'register'])->name('register');
 Route::get('/logout',[AuthController::class,'logout'])->name('logout');
+Route::get('/forgetPassword', [AuthController::class,'forgetPassword'])->name('forgetPassword');
+Route::post('/sendRestLink', [AuthController::class,'sendRestLink'])->name('sendRestLink');
+Route::get('resetPassword/{token}',[AuthController::class,'resetPassword'])->name('resetPassword');
+Route::post('resetNewPassword',[AuthController::class,'resetNewPassword'])->name('resetNewPassword');
+Route::get('/changePassword',[AuthController::class,'changePassword'])->name('changePassword');
+
+
+Route::get('itemList',[InventoryItemController::class, 'index'])->name('itemList');

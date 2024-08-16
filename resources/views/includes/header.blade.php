@@ -26,13 +26,42 @@
                                 <img src="{{ asset('assets/img/avatars/user.png') }}" alt class="w-px-40 h-auto rounded-circle">
                             </div>
                         </div>
+                      
                         @if(auth()->user())
                         <div class="flex-grow-1">
+                        @php
+                            $userRole = '';
+                            switch(auth()->user()->userRole) {
+                                case 0:
+                                    $userRole = 'Superadmin';
+                                    break;
+                                case 1:
+                                    $userRole = 'Admin';
+                                    break;
+                                case 2:
+                                    $userRole = 'User';
+                                    break;
+                                default:
+                                    $userRole = 'Unknown';
+                                    break;
+                            }
+                        @endphp
                             <span class="fw-medium d-block">{{auth()->user()->firstname}} {{auth()->user()->lastname}}</span>
-                            <small class="text-muted">{{auth()->user()->userRole}}</small>
+                            <small class="text-muted">
+                                {{$userRole}}
+                            </small>
                         </div>
                         @endif
                     </div>
+                    </a>
+                </li>
+                <li>
+                    <div class="dropdown-divider"></div>
+                </li>
+                <li>
+                    <a class="dropdown-item" href="{{ route('changePassword') }}">
+                    <i class="bx bx-lock me-2"></i>
+                    <span class="align-middle">Change Password</span>
                     </a>
                 </li>
                 <li>

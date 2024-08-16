@@ -27,7 +27,7 @@
                <div class="mb-3">
                   <div class="d-flex justify-content-between">
                      <label class="form-label" for="password">Password</label>
-                     <a href="auth-forgot-password-basic.html">
+                     <a href="{{ route('forgetPassword')}}">
                      <small>Forgot Password?</small>
                      </a>
                   </div>
@@ -101,10 +101,9 @@
                required :'Password is required',
                minlength: 'Password must be at least 6 characters long'
             },
-            errorPlacement: function(error, element) {
-               if (element.attr("name") == "terms") {
-                  error.appendTo("#terms-error");
-               }else if (element.attr("name") === "password") {
+         },
+         errorPlacement: function(error, element) {
+               if (element.attr("name") === "password") {
                   error.appendTo("#password-error")
                } else {
                   error.insertAfter(element);
@@ -113,7 +112,6 @@
             submitHandler: function(form){
                form.submit();
             }
-        },
       })
    });
 </script>

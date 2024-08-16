@@ -4,10 +4,6 @@
     @include('includes.head')
 </head>
 <body>
-    
-  <!-- ?PROD Only: Google Tag Manager (noscript) (Default ThemeSelection: GTM-5DDHKGP, PixInvent: GTM-5J3LMKC) -->
-  <!-- <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5DDHKGP" height="0" width="0" style="display: none; visibility: hidden"></iframe></noscript> -->
-
     <div class="layout-wrapper layout-content-navbar  ">
         <div class="layout-container">
             @include('includes.sidebar')
@@ -27,4 +23,5 @@
     </footer>
     @yield('scripts')
 </body>
+</html>
 
