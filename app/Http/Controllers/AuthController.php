@@ -16,6 +16,11 @@ use DB;
 
 class AuthController extends Controller
 {
+
+    public function dashboard(){
+        return view('dashboard');
+    }
+
     public function signIn(){
         return view('auth.signIn');
     }
@@ -153,6 +158,40 @@ class AuthController extends Controller
     }
 
     public function changePassword (){
-        return view('auth.');
+        return view('auth.changePassword');
+    }
+
+    public function updatePassword(Request $request){
+        try{
+
+            $validated = $request->validate([
+                'oldPassword' => 'required',
+                'password' => 'required|confirmed',
+                'password_confirmation' => 'required'
+            ]);
+            $validated['password'] = Hash::make($validated['password']);
+  
+            if (!Hash::check($validated['oldPassword'], Auth::user()->password)) {
+                return redirect()->back()->with('error', 'Old Password didn\'t match');
+            }
+            $userID = $request->userID;
+            $user = User::find($userID);
+  
+            if($user){
+                $updatePassword = $user->update([
+                    'password' => $validated['password']
+                ]);
+
+                if($updatePassword){
+                    return redirect('/dashboard')->with('success', 'Password updated successfully');
+                }else {
+                    return back()->with('error', 'Failed to update password');
+                }
+            }else{
+                return back()->with('error', 'User not found');
+            }
+        }catch (\Exception $e){
+           return back()->with('error', 'Something went wrong');
+        }
     }
 }

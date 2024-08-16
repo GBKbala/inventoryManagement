@@ -15,7 +15,7 @@
                         <h5 class="mb-0">All Inventory Items</h5>
                     </div>
                     <div>
-                        <a href="">
+                        <a href="{{ route('addItem')}}">
                             <button class="btn btn-primary">Add Item</button>
                         </a>
                     </div>

@@ -16,9 +16,6 @@ use App\Http\Controllers\InventoryItemController;
 */
 
 
-Route::get('/dashboard', function(){
-    return view('dashboard');
-});
 
 Route::get('/productList', function () {
     return view('items.index');
@@ -35,5 +32,10 @@ Route::get('resetPassword/{token}',[AuthController::class,'resetPassword'])->nam
 Route::post('resetNewPassword',[AuthController::class,'resetNewPassword'])->name('resetNewPassword');
 Route::get('/changePassword',[AuthController::class,'changePassword'])->name('changePassword');
 
+Route::post('/updatePassword',[AuthController::class,'updatePassword'])->name('updatePassword');
+
+Route::get('/dashboard', [AuthController::class,'dashboard'])->name('dashboard');
+
 
 Route::get('itemList',[InventoryItemController::class, 'index'])->name('itemList');
+Route::get('addItem',[InventoryItemController::class,'add'])->name('addItem');
