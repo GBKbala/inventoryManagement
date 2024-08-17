@@ -45,22 +45,37 @@ class InventoryItemController extends Controller
             $itemCreate = InventoryItem::create($validated);
             if ($itemCreate) {
                 $this->logAction('create', $itemCreate->id, $validated);
-                return redirect('itemList')->with('success', 'Item added successfully');
+
+                $return = [
+                    'status' => 'success',
+                    'message' => 'Item added successfully',
+                ];
+                return response()->json($return);
             }else{
-                return back()->with('error', 'Unable to add item');
+                $return = [
+                    'status' => 'error',
+                    'message' => 'Unable to add item',
+                ];
+                return response()->json($return);
             }
     
         }catch (\Exception $e) {
-            return back()->with('error', 'An error occurred');
+            
+            $return = [
+                'status' => 'error',
+                'message' => 'Something went Wrong',
+            ];
+            return response()->json($return);
         }
     }
 
     public function edit($id){
         $inevntoryItem = InventoryItem::find($id);
-        return view('inventoryItems.edit', compact('inevntoryItem'));
+        return response()->json($inevntoryItem);
     }
 
-    public function update(Request $request, $id){
+    public function update(Request $request){
+       
         $validated = $request->validate([
             'name' => 'required',
             'description' => 'required',
@@ -68,32 +83,59 @@ class InventoryItemController extends Controller
             'price' => 'required'
         ]);
         try {
-            $item = InventoryItem::find($id);
+            $itemId = $request->itemId;
+
+            $item = InventoryItem::find($itemId);
             $itemUpdate = $item->update($validated);
             if ($itemUpdate) {
-                $this->logAction('update', $id, $validated);
-                return redirect('itemList')->with('success', 'Item updated successfully');
+                $this->logAction('update', $itemId, $validated);
+                $return = [
+                    'status' => 'success',
+                    'message' => 'Item updated successfully',
+                ];
+                return response()->json($return);
             }else{
-                return back()->with('error', 'Unable to update item');
+                $return = [
+                    'status' => 'error',
+                    'message' => 'Unable to add Item',
+                ];
+                return response()->json($return);
             }
     
         }catch (\Exception $e) {
-            return back()->with('error', 'An error occurred');
+            $return = [
+                'status' => 'error',
+                'message' => 'Something went Wrong',
+            ];
+            return response()->json($return);
         }
     }
 
     public function destroy(Request $request, $id){
         try {
-            $item = InventoryItem::findOrFail($id);
+            $item = InventoryItem::find($id);
             $itemDelete = $item->delete();
             if ($itemDelete) {
-                $this->logAction('delete', $id);
-                return redirect('itemList')->with('success', 'Item deleted successfully');
+                $this->logAction('delete', $id, null);
+                $return = [
+                    'status' => 'success',
+                    'message' => 'Item deleted successfully',
+                ];
+                return response()->json($return);
             } else {
-                return redirect('itemList')->with('error', 'Unable to Delete item');
+                $return = [
+                    'status' => 'error',
+                    'message' => 'Unable to Delete item',
+                ];
+                return response()->json($return);
             }
         }catch (\Exception $e) {
-            return redirect('itemList')->with('error', 'An error occurred');
+            dd($e->getMessage());
+            $return = [
+                'status' => 'error',
+                'message' => 'Something wrong!',
+            ];
+            return response()->json($return);
         }
     }
 

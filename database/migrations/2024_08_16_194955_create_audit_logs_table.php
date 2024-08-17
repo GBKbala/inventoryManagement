@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('action');
             $table->integer('item_id');
             $table->integer('user_id'); 
-            $table->text('details');
+            $table->text('details')->nullable();
             $table->timestamps();
         });
     }

@@ -142,25 +142,6 @@
 @section('scripts')
 <script>
    
-    function confirmation(ev) {
-        ev.preventDefault();
-        var urlToRedirect = ev.currentTarget.getAttribute('href');  
-        // console.log(urlToRedirect); 
-        Swal.fire({
-            title: "Are you sure?",
-            text: "Once deleted, you will not be able to recover this item!",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: "#DD6B55",
-            confirmButtonText: "Yes, delete it!",
-            cancelButtonText: "No, cancel please!",
-        }).then((result) => {
-            if (result.isConfirmed) {
-                window.location.href = urlToRedirect;
-            }
-        });
-    }
-
     function fetchData(){
 
         if ($.fn.DataTable.isDataTable('#users')) {
@@ -385,7 +366,7 @@
                         $('.'+key).append('<span class="alert-danger">'+value+'</span>');
                     }); 
                 }
-        });
+            });
 
         }
     });
