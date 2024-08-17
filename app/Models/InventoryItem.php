@@ -14,7 +14,7 @@ class InventoryItem extends Model
     protected $fillable = [
         'name', 
         'description', 
-        'quantity_in_stock', 
+        'quantity', 
         'price'
     ];
 

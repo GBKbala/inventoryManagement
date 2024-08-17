@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\InventoryItem;
 use App\Models\AuditLog;
+use App\Imports\ItemsImport;
+use App\Exports\ItemsExport;
+use Maatwebsite\Excel\Facades\Excel;
 use Auth;
 use Session;
 
@@ -17,6 +20,35 @@ class InventoryItemController extends Controller
     public function getInventoryItems(){
         $inevntoryItems = InventoryItem::latest()->get();
         return response()->json($inevntoryItems);
+    }
+
+    public function importExcelFile(Request $request){
+        
+        $validated = $request->validate([
+            'file' => 'required|file|mimes:xlsx,xls,csv,txt'
+        ],[
+            'file.required' => 'A file is required to import',
+            'file.file' => 'The uploaded file must be a valid file',
+            'file.mimes' => 'The file must be of type: xlsx, xls, csv'
+        ]);
+        try {
+            Excel::import(new ItemsImport, $validated['file']);
+            return redirect()->route('itemList')->with('success', 'Items imported successfully');
+        } catch (\Exception $e) {
+            dd($e->getMessage());
+            return redirect()->route('itemList')->with('error', 'Failed to import items');
+        }
+
+    }
+
+    public function export() 
+    {
+        try{
+            $fileName = "Items.xlsx";
+            return Excel::download(new ItemsExport,$fileName);
+        }catch(\Exception $e){
+            return redirect()->route('itemList')->with('error', 'Failed to export items');
+        }
     }
 
     public function add (){
@@ -37,7 +69,7 @@ class InventoryItemController extends Controller
         $validated = $request->validate([
             'name' => 'required',
             'description' => 'required',
-            'quantity_in_stock' => 'required',
+            'quantity' => 'required',
             'price' => 'required'
         ]);
         // dd($validated);
@@ -79,7 +111,7 @@ class InventoryItemController extends Controller
         $validated = $request->validate([
             'name' => 'required',
             'description' => 'required',
-            'quantity_in_stock' => 'required',
+            'quantity' => 'required',
             'price' => 'required'
         ]);
         try {

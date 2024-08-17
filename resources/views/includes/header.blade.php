@@ -47,6 +47,7 @@
                             }
                         @endphp
                             <span class="fw-medium d-block">{{auth()->user()->firstname}} {{auth()->user()->lastname}}</span>
+                            <span class="fw-medium d-block">{{auth()->user()->email}}</span>
                             <small class="text-muted">
                                 {{$userRole}}
                             </small>

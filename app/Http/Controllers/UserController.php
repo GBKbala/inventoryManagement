@@ -7,12 +7,17 @@ use App\Models\User;
 use Hash;
 use Session;
 use \DateTime;
-
+use Illuminate\Support\Facades\Gate;
 
 class UserController extends Controller
 {
     public function index(){
-        return view('users.index');
+
+        if (Gate::allows('view-user')) {
+            return view('users.index');
+        }
+        // abort(403, 'Unauthorized');
+       return redirect('dashboard')->with('error','Unauthorized access');
     }
 
     public function getUsers(){
@@ -22,6 +27,12 @@ class UserController extends Controller
 
 
     public function storeUser(Request $request){
+
+        if (!Gate::allows('store-user')) {
+            return redirect('dashboard')->with('error','Unauthorized access');
+        }
+    
+
         $validated = $request->validate([
             'firstname' => 'required|string',
             'lastname' => 'nullable|string',
@@ -88,11 +99,17 @@ class UserController extends Controller
     }
 
     public function editUser($id){
+        if (!Gate::allows('edit-user')) {
+            return redirect('dashboard')->with('error','Unauthorized access');
+        }
         $userEdit = User::find($id);
         return response()->json($userEdit);
     }
 
     public function updateUser(Request $request){
+        if (!Gate::allows('update-user')) {
+            return redirect('dashboard')->with('error','Unauthorized access');
+        }
         $userId = $request->input('userId');
         $validated = $request->validate([
             'firstname' => 'required|string',
@@ -163,6 +180,9 @@ class UserController extends Controller
     }
 
     public function destroyUser(Request $request, $id){
+        if (!Gate::allows('delete-user')) {
+            return redirect('dashboard')->with('error','Unauthorized access');
+        }
         try{
 
             $user = User::find($id);

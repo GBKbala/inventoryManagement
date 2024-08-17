@@ -14,11 +14,13 @@
                     <div>
                         <h5 class="mb-0">All Users</h5>
                     </div>
-                    <div>
-                        <a href="javascript:void(0);">
-                            <button type="button" class="btn btn-primary" data-bs-target="#userModal" id="addUser">Add User</button>
-                        </a>
-                    </div>
+                    @can('add-user')
+                        <div>
+                            <a href="javascript:void(0);">
+                                <button type="button" class="btn btn-primary" data-bs-target="#userModal" id="addUser">Add User</button>
+                            </a>
+                        </div>
+                    @endcan
                 </div>
             </div>
     

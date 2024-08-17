@@ -48,6 +48,9 @@ Route::middleware(['auth'])->group( function(){
     Route::post('/updateItem',[InventoryItemController::class,'update'])->name('updateItem');
     Route::get('/deleteItem/{id}',[InventoryItemController::class,'destroy'])->name('deleteItem');
 
+    Route::post('/importExcelfile', [InventoryItemController::class,'importExcelFile'])->name('importExcelFile');
+    Route::get('/export', [InventoryItemController::class,'export'])->name('export');
+
     Route::get('/users', [UserController::class, 'index'])->name('users');
     Route::get('/getUsers', [UserController::class, 'getUsers'])->name('getUsers');
     Route::post('storeUser', [UserController::class,'storeUser'])->name('storeUser');

@@ -11,16 +11,42 @@
         <div class="card">
 
             <div class="card-header">
-                <div class="d-flex justify-content-between align-items-center mb-3">
+                <div class="d-flex justify-content-start mb-3">
                     <div>
                         <h5 class="mb-0">All Inventory Items</h5>
                     </div>
-                    <div>
-                        <a href="javascript:void(0);">
-                            <button class="btn btn-primary" data-bs-target="#itemModal"  id="addItem">Add Item</button>
-                        </a>
+                </div>
+
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                   
+                    <div class="d-flex align-items-center mt-3">
+                        <form id="fileUpload" action="{{ route('importExcelFile') }}" method="POST" enctype="multipart/form-data" class="d-flex">
+                            @csrf
+                            @method('POST')
+                            <div class="me-2">
+                                <input type="file" class="form-control" id="file" name="file">
+                                @error('file')<div class="text-danger error">{{ $message }}</div>@enderror
+                            </div>
+                            <div>
+                                <button type="submit" class="btn btn-secondary">Import</button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="d-flex align-items-center ms-auto">
+                        <div class="me-3">
+                            <a href="{{ route('export') }}" class="btn btn-success">Export</a>
+                        </div>
+                        @can('add-item')
+                            <div>
+                                <a href="javascript:void(0);">
+                                    <button class="btn btn-primary" data-bs-target="#itemModal" id="addItem">Add Item</button>
+                                </a>
+                            </div>
+                        @endcan
                     </div>
                 </div>
+
             </div>
     
             <div class="card-body">
@@ -32,7 +58,9 @@
                                 <th>Description</th>
                                 <th>Quantity</th>
                                 <th>Price ₹</th>
-                                <th>Action</th>
+                                @canany(['edit-item', 'delete-item'])
+                                    <th>Action</th>
+                                @endcanany
                             </tr>
                         </thead>
                         <tbody>
@@ -66,9 +94,9 @@
                </div>
 
                <div class="col-12">
-                  <label class="form-label" for="quantity_in_stock">Quanity In Stock</label>
-                  <input type="number" class="form-control" id="quantity_in_stock" name="quantity_in_stock" placeholder="Quantity In stock" />
-                  <div class="quantity_in_stock error"></div>
+                  <label class="form-label" for="quantity">Quanity In Stock</label>
+                  <input type="number" class="form-control" id="quantity" name="quantity" placeholder="Quantity In stock" />
+                  <div class="quantity error"></div>
                </div>
                <div class="col-12">
                   <label class="form-label" for="price">Price</label>
@@ -90,7 +118,29 @@
 @section('scripts')
 <script>
    
-   
+    $(document).ready(function() {
+        $('#fileUpload').change( function (){
+            $('.error').text(' ');
+        });
+
+        $('#fileUpload').validate({
+            rules: {
+                file: {
+                    required: true,
+                    extension: "xlsx|xls|csv"
+                }
+            },
+            messages: {
+                file: {
+                    required: "A file is required to import",
+                    extension: "Only files with extensions .xlsx, .xls, .csv are allowed"
+                }
+            },
+            submitHandler: function(form) {
+                form.submit();
+            }
+        });
+    });
 
     function fetchData(){
         if ($.fn.DataTable.isDataTable('#inventoryItems')) {
@@ -107,47 +157,57 @@
                     columns: [
                         {"data": "name" },
                         {"data": "description" },
-                        { "data": "quantity_in_stock" },
+                        { "data": "quantity" },
                         { "data": "price" },
+                        @canany(['edit-item', 'delete-item'])
                         {
                             "data": null,
                             "render": function(data, type, row) {
-                                return `<div class="flex">
-                                            <a href="javascript:void(0);" class="editItem btn btn-sm btn-warning mx-1" data-id="${row.id}">Edit</a>
-                                            <a href="javascript:void(0)" class="deleteItem btn btn-sm btn-danger" data-id="${row.id}">Delete</a>
-                                        </div>`;
+                                let actionButtons = '<div class="flex">';
+                                
+                                @can('edit-item')
+                                    actionButtons += `<a href="javascript:void(0);" class="editItem btn btn-sm btn-warning mx-1" data-id="${row.id}">Edit</a>`;
+                                @endcan
+                                
+                                @can('delete-item')
+                                    actionButtons += `<a href="javascript:void(0)" class="deleteItem btn btn-sm btn-danger" data-id="${row.id}">Delete</a>`;
+                                @endcan
+                                actionButtons += '</div>';
+                                
+                                return actionButtons;
                             }
                         }
+                        @endcanany
                     ],
                     responsive:true,
                     pageLength: 50,
                     order: [],
                     // stateSave: true,
-                    dom: 'Bfrtip',
-                    buttons: [
-                        {
-                            extend: 'csvHtml5',
-                            text: 'Export CSV',
-                            title: '', 
-                            className: 'btn btn-sm btn-primary',
-                            exportOptions: {
-                                columns: function (idx, data, node) {
-                                    return idx !== 4;
-                                }
-                            }
-                        },
-                        {
-                            extend: 'excelHtml5',
-                            text: 'Export Excel',
-                            title: '', 
-                            className: 'btn btn-sm btn-success',
-                            exportOptions: {
-                                columns: function (idx, data, node) {
-                                    return idx !== 4;
-                                }
-                            }
-                        }
-                    ]
+                    // dom: 'Bfrtip',
+                    // buttons: [
+                    //     {
+                    //         extend: 'csvHtml5',
+                    //         text: 'Export CSV',
+                    //         title: '', 
+                    //         className: 'btn btn-sm btn-primary',
+                    //         exportOptions: {
+                    //             columns: function (idx, data, node) {
+                    //                 return idx !== 4;
+                    //             }
+                    //         }
+                    //     },
+                    //     {
+                    //         extend: 'excelHtml5',
+                    //         text: 'Export Excel',
+                    //         title: '', 
+                    //         className: 'btn btn-sm btn-success',
+                    //         exportOptions: {
+                    //             columns: function (idx, data, node) {
+                    //                 return idx !== 4;
+                    //             }
+                    //         }
+                    //     }
+                    // ]
                 })
             },
             error: function(error, xhr, status){
@@ -157,6 +217,7 @@
     }
 
     $('#addItem').click(function (){
+        $('.error').text(' ');
         $('#itemModal').modal('show');
         $('.modalTitle').text('Add Item');
 
@@ -173,7 +234,7 @@
                 description: {
                     required: true,
                 },
-                quanity_in_stock : {
+                quantity : {
                     required : true,
                     number: true
                 },
@@ -189,8 +250,8 @@
                 description: {
                     required: "Description is required",
                 },
-                quanity_in_stock: {
-                    required: "Quantity in stock is required",
+                quantity: {
+                    required: "Quantity is required",
                     number: "Quantity must be a number"
                 },
                 price: {
@@ -261,7 +322,7 @@
                 console.log(response);
                 $('#itemModal #name').val(response.name);
                 $('#itemModal #description').val(response.description);
-                $('#itemModal #quantity_in_stock').val(response.quantity_in_stock);
+                $('#itemModal #quantity').val(response.quantity);
                 $('#itemModal #price').val(response.price);
                 $('#itemModal #itemId').val(response.id);
             }

@@ -101,21 +101,22 @@
          </li>
          <!-- e-commerce-app menu end -->
         
-      
-         <li class="menu-item">
-            <a href="javascript:void(0);" class="menu-link menu-toggle">
-               <i class="menu-icon tf-icons bx bx-user"></i>
-               <div class="text-truncate" data-i18n="Users">Users</div>
-            </a>
-            <ul class="menu-sub">
-               <li class="menu-item">
-                  <a href="{{ route('users') }}" class="menu-link">
-                     <div class="text-truncate" data-i18n="List">List</div>
-                  </a>
-               </li>
-            </ul>
-         </li>
-         <li class="menu-item">
+         @can('view-user')
+            <li class="menu-item">
+               <a href="javascript:void(0);" class="menu-link menu-toggle">
+                  <i class="menu-icon tf-icons bx bx-user"></i>
+                  <div class="text-truncate" data-i18n="Users">Users</div>
+               </a>
+               <ul class="menu-sub">
+                  <li class="menu-item">
+                     <a href="{{ route('users') }}" class="menu-link">
+                        <div class="text-truncate" data-i18n="List">List</div>
+                     </a>
+                  </li>
+               </ul>
+            </li>
+         @endcan
+         <!-- <li class="menu-item">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
                <i class='menu-icon tf-icons bx bx-check-shield'></i>
                <div class="text-truncate" data-i18n="Roles & Permissions">Roles & Permissions</div>
@@ -132,7 +133,7 @@
                   </a>
                </li>
             </ul>
-         </li>
+         </li> -->
         
       
          
