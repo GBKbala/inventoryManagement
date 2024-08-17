@@ -165,7 +165,6 @@ class UserController extends Controller
     public function destroyUser(Request $request, $id){
         try{
 
-        
             $user = User::find($id);
             $userDelete = $user->delete();
             if($userDelete){

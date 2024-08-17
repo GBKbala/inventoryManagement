@@ -425,8 +425,8 @@
 
     $(document).on('click', '.deleteUser', function() {
 
-        userId= $(this).data('id');
-        var urlToRedirect = 'deleteUser/'+userId;  
+        id= $(this).data('id');
+        var urlToRedirect = 'deleteUser/'+id;  
         // console.log(urlToRedirect); 
         Swal.fire({
             title: "Are you sure?",
@@ -438,7 +438,15 @@
             cancelButtonText: "No, cancel please!",
         }).then((result) => {
             if (result.isConfirmed) {
-                fetchData();
+                $.ajax({
+                    url : urlToRedirect,
+                    method: "GET",
+                    data:{id:id},
+                    success: function(response){
+                        showToastr(response.status, response.message);
+                        fetchData();
+                    }
+                })
             }
         });
     });
