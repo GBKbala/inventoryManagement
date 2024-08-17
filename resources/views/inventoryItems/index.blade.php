@@ -220,9 +220,9 @@
         $('.error').text(' ');
         $('#itemModal').modal('show');
         $('.modalTitle').text('Add Item');
-
-        $('#submit').val('Submit');
         $('input').val('');
+        $('#submit').val('Submit');
+        
 
     });
 
