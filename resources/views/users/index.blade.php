@@ -13,11 +13,11 @@
             <div class="card-header">
                 <div class="d-flex justify-content-between align-items-center mb-3">
                     <div>
-                        <h5 class="mb-0">All Inventory Items</h5>
+                        <h5 class="mb-0">All Users</h5>
                     </div>
                     <div>
                         <a href="{{ route('addItem')}}">
-                            <button class="btn btn-primary">Add Item</button>
+                            <button class="btn btn-primary">Add User</button>
                         </a>
                     </div>
                 </div>
@@ -28,10 +28,10 @@
                     <table id="inventoryItems" class="table p-2">
                         <thead>
                             <tr>
-                                <th>Name</th>
-                                <th>Description</th>
-                                <th>Quantity</th>
-                                <th>Price ₹</th>
+                                <th>First Name</th>
+                                <th>Last Name</th>
+                                <th>User Name</th>
+                                <th>Role</th>
                                 <th>Action</th>
                             </tr>
                         </thead>

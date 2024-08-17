@@ -2,6 +2,11 @@
 @section('title') Edit Item @endsection
 
 @section('content')
+<style>
+#description {
+    text-align: left !important;
+}
+</style>
 <div class="container-xxl flex-grow-1 container-p-y">
     <div class="row">
         <div class="col-xxl">
@@ -13,8 +18,9 @@
                         <div class="row mb-3">
                             <label class="col-sm-2 col-form-label text-capitalize fs-6" for="name">Name</label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" id="name" name="name" placeholder="Item Name" value="{{$inevntoryItem->name }}" />
-                                <input type="hidden" name="itemID" id="itemID" value="{{$inevntoryItem->id }}">
+                                <input type="text" class="form-control" id="name" name="name" placeholder="Item Name" 
+                                value="{{$inevntoryItem->name }}" />
+                                <input type="hidden" name="itemID" id="itemID" value="{{$inevntoryItem->id}}">
                                 <div class="text-danger">@error('name'){{$message}}@enderror</div>
                             </div>
                         </div>
@@ -22,7 +28,7 @@
                         <div class="row mb-3">
                             <label class="col-sm-2 col-form-label text-capitalize fs-6" for="description">Description</label>
                             <div class="col-sm-10">
-                                <textarea id="description" name="description" id="description" class="form-control" placeholder="Enter Description" aria-label="description" aria-describedby="basic-icon-default">
+                                <textarea id="description" name="description" id="description" class="form-control text-left" style="text-align: left;">
                                     {{$inevntoryItem->description}}</textarea>
                                 <div class="text-danger">@error('description'){{$message}}@enderror</div>
                             </div>

@@ -24,7 +24,7 @@ return new class extends Migration
             $table->text('address');
             $table->string('state');
             $table->string('pincode');
-            $table->tinyInteger('userRole')->default(2);
+            $table->tinyInteger('userRole')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->rememberToken();
             $table->timestamps();

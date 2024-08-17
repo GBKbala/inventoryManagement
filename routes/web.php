@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\InventoryItemController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -40,10 +41,13 @@ Route::middleware(['auth'])->group( function(){
     Route::get('/dashboard', [AuthController::class,'dashboard'])->name('dashboard');
 
     Route::get('/itemList',[InventoryItemController::class, 'index'])->name('itemList');
+    Route::get('getInventoryItems', [InventoryItemController::class, 'getInventoryItems'])->name('getInventoryItems');
     Route::get('addItem',[InventoryItemController::class,'add'])->name('addItem');
     Route::post('storeItem',[InventoryItemController::class,'store'])->name('storeItem');
     Route::get('/editItem/{id}', [InventoryItemController::class,'edit'])->name('editItem');
     Route::put('/updateItem/{id}',[InventoryItemController::class,'update'])->name('updateItem');
     Route::get('/deleteItem/{id}',[InventoryItemController::class,'destroy'])->name('deleteItem');
+
+    Route::get('/users', [UserController::class, 'index'])->name('users');
 
 });
