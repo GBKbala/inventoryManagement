@@ -79,6 +79,7 @@ class AuthController extends Controller
        
         try{
             $validated['password'] = Hash::make($validated['password']);
+            $validated['userRole'] = 2;
 
             $date = DateTime::createFromFormat('d-m-Y', $validated['dob']);
             $validated['dob'] = $date->format('Y-m-d');

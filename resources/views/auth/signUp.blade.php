@@ -69,7 +69,7 @@
                     </div>
                     <div class="col-sm-12">
                         <label class="form-label" for="dob">Date of Birth</label>
-                        <input type="text" id="dob" name="dob" class="form-control datepicker" placeholder="DD-MM-YYYY" value="{{ old('dob') }}"/>
+                        <input type="text" id="dob" name="dob" class="form-control datepicker" placeholder="DD-MM-YYYY" value="{{ old('dob') }}" autocomplete="off"/>
                         @error('dob')<div class="text-danger">{{ $message }}</div>@enderror
                     </div>
                     <div class="col-sm-6">
@@ -98,9 +98,10 @@
                     </div>
                     <div class="col-sm-6">
                         <label class="form-label" for="state">State</label>
-                        <select id="state" name="state" class="select2 form-select" data-allow-clear="true">
+                        <!-- <select id="state" name="state" class="select2 form-select" data-allow-clear="true">
                         
-                        </select>
+                        </select> -->
+                        <input type="text" id="state" name="state" class="form-control" placeholder="Enter Your State" value="{{old('state')}}">
                         @error('state')<div class="text-danger">{{ $message }}</div>@enderror
                         <div id="state-error" class="text-danger"></div>
                     </div>

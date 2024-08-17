@@ -65,16 +65,16 @@ const indianStates = [
     {"value": "WB", "label": "West Bengal"}
 ];
 
-$(document).ready(function() {
-    indianStates.forEach(function(state) {
-        $('#state').append($('<option></option>').attr('value', state.value).text(state.label));
-    });
+// $(document).ready(function() {
+//     indianStates.forEach(function(state) {
+//         $('#state').append($('<option></option>').attr('value', state.value).text(state.label));
+//     });
 
-    $('#state').select2({
-        placeholder: "Select a state",
-        allowClear: true
-    });
-});
+//     $('#state').select2({
+//         placeholder: "Select a state",
+//         allowClear: true
+//     });
+// });
 
 $(document).ready(function() {
     $('#dob').datepicker({

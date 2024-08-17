@@ -49,5 +49,10 @@ Route::middleware(['auth'])->group( function(){
     Route::get('/deleteItem/{id}',[InventoryItemController::class,'destroy'])->name('deleteItem');
 
     Route::get('/users', [UserController::class, 'index'])->name('users');
+    Route::get('/getUsers', [UserController::class, 'getUsers'])->name('getUsers');
+    Route::post('storeUser', [UserController::class,'storeUser'])->name('storeUser');
+    Route::get('/editUser/{id}', [UserController::class,'editUser'])->name('editUser');
+    Route::post('/updateUser',[UserController::class,'updateUser'])->name('updateUser');
+    Route::get('/deleteUser/{id}', [UserController::class,'destroyUser'])->name('deleteUser');
 
 });
