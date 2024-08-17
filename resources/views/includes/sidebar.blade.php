@@ -135,7 +135,12 @@
             </ul>
          </li> -->
         
-      
+         <li class="menu-item">
+            <a href="{{ route('logout') }}" class="menu-link">
+               <i class="menu-icon tf-icons bx bx-power-off"></i>
+               <div class="text-truncate" data-i18n="Users">Logout</div>
+            </a>
+         </li>
          
       </ul>
 </aside>
