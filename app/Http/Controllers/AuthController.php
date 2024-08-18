@@ -17,10 +17,6 @@ use DB;
 class AuthController extends Controller
 {
 
-    public function dashboard(){
-        return view('dashboard');
-    }
-
     public function signIn(){
         return view('auth.signIn');
     }

@@ -8,6 +8,7 @@ use App\Http\Controllers\DispatchController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\PurchaseController;
+use App\Http\Controllers\DashboardController;
 
 
 /*
@@ -43,7 +44,7 @@ Route::post('/updatePassword',[AuthController::class,'updatePassword'])->name('u
 
 Route::middleware(['auth'])->group( function(){
 
-    Route::get('/dashboard', [AuthController::class,'dashboard'])->name('dashboard');
+    Route::get('/dashboard', [DashboardController::class,'index'])->name('dashboard');
 
     Route::get('/itemList',[InventoryItemController::class, 'index'])->name('itemList');
     Route::get('getInventoryItems', [InventoryItemController::class, 'getInventoryItems'])->name('getInventoryItems');

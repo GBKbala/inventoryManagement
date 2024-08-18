@@ -7,9 +7,20 @@ use App\Models\PurchasedItem;
 use App\Models\InventoryItem;
 use App\Models\Supplier;
 use \DateTime;
+use Illuminate\Support\Facades\Gate;
 
 class PurchaseController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(function ($request, $next) {
+            if (Gate::denies('purchase')) {
+                return redirect('dashboard')->with('error', 'Unauthorized access');
+            }
+            return $next($request);
+        });
+    }
+
     public function index(){
         $items = InventoryItem::all();
         $suppliers = Supplier::all();

@@ -7,9 +7,20 @@ use App\Models\DispatchedItem;
 use App\Models\InventoryItem;
 use App\Models\Customer;
 use \DateTime;
+use Illuminate\Support\Facades\Gate;
 
 class DispatchController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(function ($request, $next) {
+            if (Gate::denies('dispatch')) {
+                return redirect('dashboard')->with('error', 'Unauthorized access');
+            }
+            return $next($request);
+        });
+    }
+
     public function index(){
         $items = InventoryItem::all();
         $customers = Customer::all();
