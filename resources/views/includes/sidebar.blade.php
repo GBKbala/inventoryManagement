@@ -21,7 +21,6 @@
                <div class="text-truncate" data-i18n="eCommerce">Inventory Items</div>
             </a>
             <ul class="menu-sub">
-            
                <li class="menu-item">
                   <a href="javascript:void(0);" class="menu-link menu-toggle">
                      <div class="text-truncate" data-i18n="Products">Items</div>
@@ -32,15 +31,9 @@
                            <div class="text-truncate" data-i18n="Product list">Items list</div>
                         </a>
                      </li>
-                     <!-- <li class="menu-item">
-                        <a href="app-ecommerce-product-add.html" class="menu-link">
-                           <div class="text-truncate" data-i18n="Add Product">Add Item</div>
-                        </a>
-                     </li> -->
-
                   </ul>
                </li>
-               <li class="menu-item">
+               <!-- <li class="menu-item">
                   <a href="javascript:void(0);" class="menu-link menu-toggle">
                      <div class="text-truncate" data-i18n="Order">Order</div>
                   </a>
@@ -95,12 +88,39 @@
                         </ul>
                      </li>
                   </ul>
-               </li>
-              
+               </li> -->
             </ul>
          </li>
          <!-- e-commerce-app menu end -->
+
+         <li class="menu-item">
+            <a href="javascript:void(0);" class="menu-link menu-toggle">
+               <i class="menu-icon tf-icons bx bx-box"></i>
+               <div class="text-truncate" data-i18n="Users">Customers</div>
+            </a>
+            <ul class="menu-sub">
+               <li class="menu-item">
+                  <a href="{{ route('customers') }}" class="menu-link">
+                     <div class="text-truncate" data-i18n="List">List</div>
+                  </a>
+               </li>
+            </ul>
+         </li>
         
+         <li class="menu-item">
+            <a href="javascript:void(0);" class="menu-link menu-toggle">
+               <i class="menu-icon tf-icons bx bx-box"></i>
+               <div class="text-truncate" data-i18n="Users">Dispatched Items</div>
+            </a>
+            <ul class="menu-sub">
+               <li class="menu-item">
+                  <a href="{{ route('dispatchedItems')}}" class="menu-link">
+                     <div class="text-truncate" data-i18n="List">List</div>
+                  </a>
+               </li>
+            </ul>
+         </li>
+
          @can('view-user')
             <li class="menu-item">
                <a href="javascript:void(0);" class="menu-link menu-toggle">

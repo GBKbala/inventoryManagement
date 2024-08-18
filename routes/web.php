@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\InventoryItemController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\DispatchController;
+use App\Http\Controllers\CustomerController;
 
 /*
 |--------------------------------------------------------------------------
@@ -57,5 +59,15 @@ Route::middleware(['auth'])->group( function(){
     Route::get('/editUser/{id}', [UserController::class,'editUser'])->name('editUser');
     Route::post('/updateUser',[UserController::class,'updateUser'])->name('updateUser');
     Route::get('/deleteUser/{id}', [UserController::class,'destroyUser'])->name('deleteUser');
+
+    Route::get('/customers', [CustomerController::class, 'index'])->name('customers');
+    Route::get('getCustomers',[CustomerController::class, 'getCustomers'])->name('getCustomers');
+    Route::post('storeCustomer', [CustomerController::class,'store'])->name('storeCustomer');
+    Route::get('/editCustomer/{id}', [CustomerController::class,'edit'])->name('editCustomer');
+    Route::post('/updateCustomer',[CustomerController::class,'update'])->name('updateCustomer');
+    Route::get('/deleteCustomer/{id}', [CustomerController::class,'destroy'])->name('deleteCustomer');
+
+    Route::get('/dispatchedItems', [DispatchController::class, 'index'])->name('dispatchedItems');
+    Route::get('/getDispatchedItems', [DispatchController::class,'getDispatchedItems'])->name('getDispatchedItems');
 
 });

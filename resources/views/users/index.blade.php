@@ -294,6 +294,7 @@
             },
             email: {
                 required: "Email is required",
+                email: "Enter a valid email"
             },
             password: {
                 required :'Password is required',
