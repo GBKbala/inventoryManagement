@@ -43,6 +43,7 @@ class PurchaseController extends Controller
             // dd($validated);
             $purchaseCreate = PurchasedItem::create($validated);
             if($purchaseCreate){
+                $this->addInventoryQuantity($validated['item_id'], $validated['quantity']);
                 $return = [
                     'status' => 'success',
                     'message' => 'Purchase item added successfully'
@@ -102,6 +103,7 @@ class PurchaseController extends Controller
             $purchaseItem = PurchasedItem ::find($purchaseId);
             $purchaseUpdate = $purchaseItem->update($validated);
             if($purchaseUpdate){
+                $this->addInventoryQuantity($validated['item_id'], $validated['quantity']);
                 $return = [
                     'status' => 'success',
                     'message' => 'Purchase item updated successfully'

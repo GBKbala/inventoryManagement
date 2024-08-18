@@ -12,8 +12,12 @@
 
             <div class="card-header">
                 <div class="d-flex justify-content-start mb-3">
-                    <div>
+                    <div class="p-1 mt-1">
                         <h5 class="mb-0">All Inventory Items</h5>
+                    </div>
+                    <div class="mx-2 d-flex align-items-center">
+                        <label for="" class="mx-2 mb-0">Search</label>
+                        <input type="text" name="search" id="search" class="form-control">
                     </div>
                 </div>
 
@@ -117,7 +121,8 @@
 
 @section('scripts')
 <script>
-   
+
+
     $(document).ready(function() {
         $('#fileUpload').change( function (){
             $('.error').text(' ');
@@ -142,13 +147,14 @@
         });
     });
 
-    function fetchData(){
+    function fetchData(searchValue = ''){
         if ($.fn.DataTable.isDataTable('#inventoryItems')) {
-            $('#inventoryItems').DataTable().destroy();
+            $('#inventoryItems').DataTable().clear().destroy();
         }
        $.ajax({
             url :"{{ route('getInventoryItems')}}",
             method : "GET",
+            data: { search: searchValue },
             contentType: 'application/json',
             success : function(response){
                 console.log(response);
@@ -182,6 +188,8 @@
                     responsive:true,
                     pageLength: 50,
                     order: [],
+                    destroy: true,
+                    searching: false,
                     // stateSave: true,
                     // dom: 'Bfrtip',
                     // buttons: [
@@ -227,84 +235,89 @@
     });
 
     $('#inventoryForm').validate({
-            rules : {
-                name : {
-                    required : true,
-                },
-                description: {
-                    required: true,
-                },
-                quantity : {
-                    required : true,
-                    number: true
-                },
-                price : {
-                    required :true,
-                    number: true
-                }
+        rules : {
+            name : {
+                required : true,
             },
-            messages: {
-                name: {
-                    required: "Item name is required"
-                },
-                description: {
-                    required: "Description is required",
-                },
-                quantity: {
-                    required: "Quantity is required",
-                    number: "Quantity must be a number"
-                },
-                price: {
-                    required: "Price is required",
-                    number: "Price must be a number"
-                }
+            description: {
+                required: true,
             },
-            submitHandler: function(form){
-                // form.submit();
-                var token = $('meta[name="csrf-token"]').attr('content');
-                var type = $('#submit').val();
-
-                var formData = new FormData($(form)[0]);
-        
-                formData.append('_token', token);
-                var url = '';
-                if(type =='Submit'){
-                    url = "{{ route('storeItem') }}";
-                }else{
-                    url = "{{ route('updateItem') }}";
-                }
-                
-                $('.error').html('');
-                $('#submit').attr('disabled',true);
-
-                $.ajax({
-                    url: url,
-                    type: "POST",
-                    data: formData,
-                    processData: false,
-                    contentType: false,
-                    success: function(response) {
-                        showToastr(response.status, response.message);
-                        fetchData();
-                        if (response.status == 'success') {
-                            $(form)[0].reset();
-                            $('#itemModal').modal('hide');
-                        }
-                        $('#submit').attr('disabled',false);
-                    },
-                    error: function(xhr, status, error) {
-                        $('.error').html('');
-                        $('#submit').attr('disabled',false);
-                        $.each(xhr.responseJSON.errors, function(key,value) {
-                            $('.'+key).append('<span class="alert-danger">'+value+'</span>');
-                        }); 
-                    }
-                });
+            quantity : {
+                required : true,
+                number: true
+            },
+            price : {
+                required :true,
+                number: true
             }
-        });
+        },
+        messages: {
+            name: {
+                required: "Item name is required"
+            },
+            description: {
+                required: "Description is required",
+            },
+            quantity: {
+                required: "Quantity is required",
+                number: "Quantity must be a number"
+            },
+            price: {
+                required: "Price is required",
+                number: "Price must be a number"
+            }
+        },
+        submitHandler: function(form){
+            // form.submit();
+            var token = $('meta[name="csrf-token"]').attr('content');
+            var type = $('#submit').val();
+
+            var formData = new FormData($(form)[0]);
+    
+            formData.append('_token', token);
+            var url = '';
+            if(type =='Submit'){
+                url = "{{ route('storeItem') }}";
+            }else{
+                url = "{{ route('updateItem') }}";
+            }
+            
+            $('.error').html('');
+            $('#submit').attr('disabled',true);
+
+            $.ajax({
+                url: url,
+                type: "POST",
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function(response) {
+                    showToastr(response.status, response.message);
+                    fetchData();
+                    if (response.status == 'success') {
+                        $(form)[0].reset();
+                        $('#itemModal').modal('hide');
+                    }
+                    $('#submit').attr('disabled',false);
+                },
+                error: function(xhr, status, error) {
+                    $('.error').html('');
+                    $('#submit').attr('disabled',false);
+                    $.each(xhr.responseJSON.errors, function(key,value) {
+                        $('.'+key).append('<span class="alert-danger">'+value+'</span>');
+                    }); 
+                }
+            });
+        }
+    });
 
     $(document).ready(function () {
-        fetchData();
+        fetchData('');
+        $(document).on('keyup', '#search', function(){
+            var searchValue = $('#search').val();
+            console.log(searchValue);
+            fetchData(searchValue); 
+        });
     });
 
     $(document).on('click', '.editItem', function() {

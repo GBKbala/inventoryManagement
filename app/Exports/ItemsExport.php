@@ -6,7 +6,7 @@ use App\Models\InventoryItem;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
 
-class ItemsExport implements FromCollection, WithHeadingRow
+class ItemsExport implements FromCollection,WithHeadingRow
 {
     /**
     * @return \Illuminate\Support\Collection

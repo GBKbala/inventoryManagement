@@ -53,6 +53,7 @@ class DispatchController extends Controller
             }
             $dispatchCreate = DispatchedItem::create($validated);
             if($dispatchCreate){
+                $this->deductInventoryQuantity($validated['item_id'], $validated['quantity']);
                 $return = [
                     'status' => 'success',
                     'message' => 'Dispatch item added successfully'
@@ -114,6 +115,7 @@ class DispatchController extends Controller
             $dispatchItem = DispatchedItem ::find($dispatchId);
             $dispatchUpdate = $dispatchItem->update($validated);
             if($dispatchUpdate){
+                $this->deductInventoryQuantity($validated['item_id'], $validated['quantity']);
                 $return = [
                     'status' => 'success',
                     'message' => 'Dispatch item updated successfully'

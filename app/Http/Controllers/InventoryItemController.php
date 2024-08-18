@@ -17,9 +17,22 @@ class InventoryItemController extends Controller
         return view('inventoryItems.index');
     }
     
-    public function getInventoryItems(){
-        $inevntoryItems = InventoryItem::latest()->get();
-        return response()->json($inevntoryItems);
+    public function getInventoryItems(Request $request){
+        // $inevntoryItems = InventoryItem::latest()->get();
+
+        $searchValue = $request->input('search'); 
+        $query = InventoryItem::query();
+
+        if (!empty($searchValue)) {
+            $query->where('name', 'LIKE', "%{$searchValue}%")
+                  ->orWhere('description', 'LIKE', "%{$searchValue}%")
+                  ->orWhere('quantity', 'LIKE', "%{$searchValue}%")
+                  ->orWhere('price', 'LIKE', "%{$searchValue}%");
+        }
+
+        $inventoryItems = $query->latest()->get();
+
+        return response()->json($inventoryItems);
     }
 
     public function importExcelFile(Request $request){
