@@ -315,6 +315,7 @@
     });
 
     $(document).on('click', '.editDispatchedItem', function() {
+        $('.error').text(' ');
         $('#dispatchModal').modal('show');
         $('.modalTitle').text('Edit Dispatch Item');
         

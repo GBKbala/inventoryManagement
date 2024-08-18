@@ -22,33 +22,35 @@
                 </div>
 
                 @can('add-item')
-                <div class="d-flex justify-content-between align-items-center mb-3">
-                   
-                    <div class="d-flex align-items-center mt-3">
-                        <form id="fileUpload" action="{{ route('importExcelFile') }}" method="POST" enctype="multipart/form-data" class="d-flex">
-                            @csrf
-                            @method('POST')
-                            <div class="me-2">
-                                <input type="file" class="form-control" id="file" name="file">
-                                @error('file')<div class="text-danger error">{{ $message }}</div>@enderror
-                            </div>
-                            <div>
-                                <button type="submit" class="btn btn-secondary">Import</button>
-                            </div>
-                        </form>
-                    </div>
-
-                    <div class="d-flex align-items-center ms-auto">
-                        <div class="me-3">
-                            <a href="{{ route('export') }}" class="btn btn-success">Export</a>
+                <div class="container">
+                    <div class="d-flex flex-column flex-md-row justify-content-between align-items-center mb-2">
+                
+                        <div class="d-flex flex-column flex-md-row align-items-center mb-md-0 mt-2">
+                            <form id="fileUpload" action="{{ route('importExcelFile') }}" method="POST" enctype="multipart/form-data" class="d-flex flex-column flex-md-row align-items-center">
+                                @csrf
+                                @method('POST')
+                                <div class="me-2 mb-2 mb-md-0">
+                                    <input type="file" class="form-control mt-1" id="file" name="file">
+                                    @error('file')<div class="text-danger error">{{ $message }}</div>@enderror
+                                </div>
+                                <div>
+                                    <button type="submit" class="btn btn-secondary mt-1">Import</button>
+                                </div>
+                            </form>
                         </div>
+                        <div class="d-flex flex-column flex-md-row align-items-center ms-auto">
+                            <div class="me-3 mb-md-0 sm-my-2">
+                                <a href="{{ route('export') }}" class="btn btn-success w-100 w-md-auto">Export</a>
+                            </div>
                             <div>
                                 <a href="javascript:void(0);">
-                                    <button class="btn btn-primary" data-bs-target="#itemModal" id="addItem">Add Item</button>
+                                    <button class="btn btn-primary w-100 w-md-auto" data-bs-target="#itemModal" id="addItem">Add Item</button>
                                 </a>
                             </div>
+                        </div>
                     </div>
                 </div>
+
                 @endcan
             </div>
     
@@ -98,7 +100,7 @@
 
                <div class="col-12">
                   <label class="form-label" for="quantity">Quanity In Stock</label>
-                  <input type="number" class="form-control" id="quantity" name="quantity" placeholder="Quantity In stock" />
+                  <input type="number" class="form-control" id="quantity" name="quantity" placeholder="Enter Quantity" />
                   <div class="quantity error"></div>
                </div>
                <div class="col-12">
@@ -320,6 +322,7 @@
     });
 
     $(document).on('click', '.editItem', function() {
+        $('.error').text(' ');
         $('#itemModal').modal('show');
         $('.modalTitle').text('Edit Item');
         

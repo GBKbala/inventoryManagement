@@ -318,6 +318,7 @@
     });
 
     $(document).on('click', '.editPurchasedItem', function() {
+        $('.error').text(' ');
         $('#purchaseModal').modal('show');
         $('.modalTitle').text('Edit Purchase Item');
         

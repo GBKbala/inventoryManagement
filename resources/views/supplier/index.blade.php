@@ -18,7 +18,7 @@
                 </div>
 
                 <div class="d-flex justify-content-end align-items-center mb-3">
-                    <div class="d-flex align-items-center ms-auto">
+                    <div class="d-flex align-items-center ms-auto sm-row">
                         @can('add-item')
                             <div>
                                 <a href="javascript:void(0);">
@@ -89,7 +89,7 @@
                </div>
 
                <div class="col-12 text-center">
-                  <button type="submit" id="submit" class="btn btn-primary me-sm-3 me-1">Submit</button>
+                  <button type="submit" id="submit" class="btn btn-primary me-sm-3 me-1 my-2">Submit</button>
                   <button type="reset" class="btn btn-label-danger" data-bs-dismiss="modal" aria-label="Close">Cancel</button>
                </div>
             </form>
@@ -279,6 +279,7 @@
     });
 
     $(document).on('click', '.editCustomer', function() {
+        $('.error').text(' ');
         $('#supplierModal').modal('show');
         $('.modalTitle').text('Edit Supplier');
         
