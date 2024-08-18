@@ -5,9 +5,6 @@
 <meta name="base_url" content="{{url('/')}}">
 <title>@yield('title', 'Inventory Management')</title>
 
-<!-- Favicon -->
-<!-- <link rel="icon" type="image/x-icon" href="{{ asset('assets/img/favicon/favicon.ico') }}" /> -->
-
 <!-- Fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com/">
 <link rel="preconnect" href="https://fonts.gstatic.com/">
