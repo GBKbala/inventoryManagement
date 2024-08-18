@@ -93,6 +93,7 @@
          </li>
          <!-- e-commerce-app menu end -->
 
+         @can('customer')
          <li class="menu-item">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
                <i class="menu-icon tf-icons bx bx-male"></i>
@@ -106,8 +107,9 @@
                </li>
             </ul>
          </li>
+         @endcan
          
-
+         @can('supplier')
          <li class="menu-item">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
                <i class="menu-icon tf-icons bx bx-store"></i>
@@ -121,7 +123,9 @@
                </li>
             </ul>
          </li>
+         @endcan
 
+         @can('purchase')
          <li class="menu-item">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
                <i class="menu-icon tf-icons bx bx-package"></i>
@@ -135,7 +139,9 @@
                </li>
             </ul>
          </li>
+         @endcan
         
+         @can('dispatch')
          <li class="menu-item">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
                <i class="menu-icon tf-icons bx bxs-truck"></i>
@@ -149,6 +155,7 @@
                </li>
             </ul>
          </li>
+         @endcan
 
          @can('view-user')
             <li class="menu-item">

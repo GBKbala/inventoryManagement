@@ -4,10 +4,22 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 Use App\Models\Customer;
+use Illuminate\Support\Facades\Gate;
 
 class CustomerController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware(function ($request, $next) {
+            if (Gate::denies('customer')) {
+                return redirect('dashboard')->with('error', 'Unauthorized access');
+            }
+            return $next($request);
+        });
+    }
     public function index(){
+        
         return view('customer.index');
     }
 

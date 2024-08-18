@@ -21,6 +21,7 @@
                     </div>
                 </div>
 
+                @can('add-item')
                 <div class="d-flex justify-content-between align-items-center mb-3">
                    
                     <div class="d-flex align-items-center mt-3">
@@ -41,16 +42,14 @@
                         <div class="me-3">
                             <a href="{{ route('export') }}" class="btn btn-success">Export</a>
                         </div>
-                        @can('add-item')
                             <div>
                                 <a href="javascript:void(0);">
                                     <button class="btn btn-primary" data-bs-target="#itemModal" id="addItem">Add Item</button>
                                 </a>
                             </div>
-                        @endcan
                     </div>
                 </div>
-
+                @endcan
             </div>
     
             <div class="card-body">

@@ -59,5 +59,23 @@ class AppServiceProvider extends ServiceProvider
         Gate::define('delete-item', function ($user) {
             return in_array($user->userRole, [0,1]); 
         });
+
+        Gate::define('supplier', function ($user) {
+            return in_array($user->userRole, [0]); 
+        });
+
+        Gate::define('customer', function ($user) {
+            return in_array($user->userRole, [0]); 
+        });
+
+        Gate::define('purchase', function ($user) {
+            return in_array($user->userRole, [0,1]); 
+        });
+
+        Gate::define('dispatch', function ($user) {
+            return in_array($user->userRole, [0,1]); 
+        });
+
+
     }
 }

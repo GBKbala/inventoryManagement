@@ -4,10 +4,24 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 Use App\Models\Supplier;
+use Illuminate\Support\Facades\Gate;
 
 class SupplierController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(function ($request, $next) {
+            if (Gate::denies('supplier')) {
+                return redirect('dashboard')->with('error', 'Unauthorized access');
+            }
+            return $next($request);
+        });
+    }
+
     public function index(){
+        // if (!Gate::allows('supplier')) {
+        //     return redirect('dashboard')->with('error','Unauthorized access');
+        // }
         return view('supplier.index');
     }
 
@@ -17,7 +31,7 @@ class SupplierController extends Controller
     }
 
     public function store(Request $request){
-
+    
         $validated = $request->validate([
             'name' => 'required',
             'email' => 'required|email',
