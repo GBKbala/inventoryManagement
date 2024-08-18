@@ -6,6 +6,7 @@ use App\Http\Controllers\InventoryItemController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\DispatchController;
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\SupplierController;
 
 /*
 |--------------------------------------------------------------------------
@@ -73,5 +74,14 @@ Route::middleware(['auth'])->group( function(){
     Route::get('editDispatchedItem/{id}', [DispatchController::class, 'edit'])->name('editDispatchedItem');
     Route::post('updateDispatchedItem', [DispatchController::class, 'update'])->name('updateDispatchedItem');
     Route::get('deleteDispatchedItem/{id}', [DispatchController::class,'destroy'])->name('deleteDispatchedItem');
+
+
+    Route::get('/suppliers', [SupplierController::class, 'index'])->name('suppliers');
+    Route::get('getSuppliers',[SupplierController::class, 'getSuppliers'])->name('getSuppliers');
+    Route::post('storeSupplier', [SupplierController::class,'store'])->name('storeSupplier');
+    Route::get('/editSupplier/{id}', [SupplierController::class,'edit'])->name('editSupplier');
+    Route::post('/updateSupplier',[SupplierController::class,'update'])->name('updateSupplier');
+    Route::get('/deleteSupplier/{id}', [SupplierController::class,'destroy'])->name('deleteSupplier');
+
 
 });

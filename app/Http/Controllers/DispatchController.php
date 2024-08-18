@@ -17,8 +17,7 @@ class DispatchController extends Controller
     }
 
     public function getDispatchedItems(){
-        // $dispatchedItems = DispatchedItem::latest()->get();
-        $dispatchedItems = DispatchedItem::with(['inventoryItem','customer'])->get();
+        $dispatchedItems = DispatchedItem::with(['inventoryItem','customer'])->orderBy('id', 'desc')->get();
         return response()->json($dispatchedItems);
     }
 
