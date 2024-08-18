@@ -15,14 +15,29 @@
                     </div>
                 </div>
 
-                <div class="d-flex justify-content-end align-items-center ms-auto">
-                    @can('add-item')
-                        <div>
-                            <a href="javascript:void(0);">
-                                <button class="btn btn-primary" data-bs-target="#dispatchModal" id="addItem">Add Dispatch Item</button>
-                            </a>
+                <div class="container">
+                    <div class="d-flex flex-column flex-md-row justify-content-between align-items-center mt-3">
+                        <div class="d-flex flex-column flex-md-row align-items-end">
+                            <div class="me-0 me-md-3 mb-3 mb-md-0 flex-grow-1">
+                                <label for="fromDate" class="form-label">From Date</label>
+                                <input type="text" class="form-control w-100" id="fromDate" name="fromDate">
+                            </div>
+                            <div class="me-0 me-md-3 mb-3 mb-md-0 flex-grow-1">
+                                <label for="toDate" class="form-label">To Date</label>
+                                <input type="text" class="form-control w-100" id="toDate" name="toDate">
+                            </div>
+                            <div class="mb-3 mb-md-0">
+                                <button type="button" id="filter" class="btn  btn-secondary">Filter</button>
+                            </div>
                         </div>
-                    @endcan
+                        @can('add-item')
+                            <div class="mt-3 mt-md-0 pt-5 pt-md-0">
+                                <a href="javascript:void(0);">
+                                    <button class="btn btn-primary mt-4" data-bs-target="#dispatchModal" id="addDispatch">Add Purchase Item</button>
+                                </a>
+                            </div>
+                        @endcan
+                    </div>
                 </div>
             </div>
     
@@ -80,7 +95,7 @@
 
                <div class="col-12">
                   <label class="form-label" for="quantity">Quanity</label>
-                  <input type="number" class="form-control" id="quantity" name="quantity" placeholder="Quantity In stock" />
+                  <input type="number" class="form-control" id="quantity" name="quantity" placeholder="Enter Quantity" />
                   <div class="quantity error"></div>
                </div>
                <div class="col-12">
@@ -115,19 +130,20 @@
         );
     });
 
-    $('#date').datepicker({
+    $('#date, #fromDate, #toDate').datepicker({
         format: 'dd-mm-yyyy',
         autoclose: true,
         todayHighlight: true
     });
 
-    function fetchData(){
+    function fetchData(fromDate='', toDate=''){
         if ($.fn.DataTable.isDataTable('#inventoryItems')) {
             $('#inventoryItems').DataTable().destroy();
         }
        $.ajax({
             url :"{{ route('getDispatchedItems')}}",
             method : "GET",
+            data: {fromDate: fromDate, toDate:toDate},
             contentType: 'application/json',
             success : function(response){
                 console.log(response);
@@ -137,7 +153,16 @@
                         {"data": "inventory_item.name" },
                         {"data": "customer.name" },
                         { "data": "quantity" },
-                        { "data": "date" },
+                        { 
+                            data: "date",
+                            render: function(data) {
+                                if (data) {
+                                    var parts = data.split('-');
+                                    return parts.reverse().join('-');
+                                }
+                                return '';
+                            }
+                        },
                         @canany(['edit-item', 'delete-item'])
                         {
                             "data": null,
@@ -195,7 +220,7 @@
         }) 
     }
 
-    $('#addItem').click(function (){
+    $('#addDispatch').click(function (){
         $('.error').text(' ');
         $('#dispatchModal').modal('show');
         $('.modalTitle').text('Add Dispatch Item');
@@ -282,6 +307,11 @@
 
     $(document).ready(function () {
         fetchData();
+        $('#filter').click(function (){
+            var fromDate = $('#fromDate').val();
+            var toDate = $('#toDate').val();
+            fetchData(fromDate, toDate);
+        });
     });
 
     $(document).on('click', '.editDispatchedItem', function() {

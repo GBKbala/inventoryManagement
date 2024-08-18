@@ -27,8 +27,28 @@ class DispatchController extends Controller
         return view('dispatch.index', compact('items','customers'));
     }
 
-    public function getDispatchedItems(){
-        $dispatchedItems = DispatchedItem::with(['inventoryItem','customer'])->orderBy('id', 'desc')->get();
+    public function getDispatchedItems(Request $request){
+ 
+        $fromDate = $request->fromDate;
+        $toDate = $request->toDate;
+
+        $fromDateObj = DateTime::createFromFormat('d-m-Y', $fromDate);
+        $toDateObj = DateTime::createFromFormat('d-m-Y', $toDate);
+
+        $fromDate = $fromDateObj ? $fromDateObj->format('Y-m-d') : null;
+        $toDate = $toDateObj ? $toDateObj->format('Y-m-d') : null;
+
+        // $dispatchedItems = DispatchedItem::with(['inventoryItem','customer'])->orderBy('id', 'desc')->get();
+
+        $query = DispatchedItem::with(['inventoryItem', 'customer']);
+        if ($fromDate && $toDate){
+            $query->whereBetween('date', [$fromDate, $toDate]);
+        } elseif ($fromDate){
+            $query->where('date', '>=', $fromDate);
+        } elseif ($toDate){
+            $query->where('date', '<=', $toDate);
+        }
+        $dispatchedItems = $query->orderBy('id', 'desc')->get();
         return response()->json($dispatchedItems);
     }
 

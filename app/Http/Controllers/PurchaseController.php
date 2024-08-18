@@ -27,9 +27,29 @@ class PurchaseController extends Controller
         return view('purchase.index', compact('items','suppliers'));
     }
 
-    public function getpurchasedItems(){
-        $dispatchedItems = PurchasedItem::with(['inventoryItem','Supplier'])->orderBy('id', 'desc')->get();
-        return response()->json($dispatchedItems);
+    public function getpurchasedItems(Request $request){
+        $fromDate = $request->fromDate;
+        $toDate = $request->toDate;
+
+        $fromDateObj = DateTime::createFromFormat('d-m-Y', $fromDate);
+        $toDateObj = DateTime::createFromFormat('d-m-Y', $toDate);
+
+        $fromDate = $fromDateObj ? $fromDateObj->format('Y-m-d') : null;
+        $toDate = $toDateObj ? $toDateObj->format('Y-m-d') : null;
+
+        // $dispatchedItems = PurchasedItem::with(['inventoryItem','Supplier'])->whereBetween('date', [$fromDate, $toDate])->orderBy('id', 'desc')->get();
+
+        $query = PurchasedItem::with(['inventoryItem', 'Supplier']);
+
+        if ($fromDate && $toDate){
+            $query->whereBetween('date', [$fromDate, $toDate]);
+        } elseif ($fromDate){
+            $query->where('date', '>=', $fromDate);
+        } elseif ($toDate){
+            $query->where('date', '<=', $toDate);
+        }
+        $purchasedItems = $query->orderBy('id', 'desc')->get();
+        return response()->json($purchasedItems);
     }
 
     public function store (Request $request){
