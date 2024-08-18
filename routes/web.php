@@ -69,5 +69,9 @@ Route::middleware(['auth'])->group( function(){
 
     Route::get('/dispatchedItems', [DispatchController::class, 'index'])->name('dispatchedItems');
     Route::get('/getDispatchedItems', [DispatchController::class,'getDispatchedItems'])->name('getDispatchedItems');
+    Route::post('storeDispatchedItem', [DispatchController::class,'store'])->name('storeDispatchedItem');
+    Route::get('editDispatchedItem/{id}', [DispatchController::class, 'edit'])->name('editDispatchedItem');
+    Route::post('updateDispatchedItem', [DispatchController::class, 'update'])->name('updateDispatchedItem');
+    Route::get('deleteDispatchedItem/{id}', [DispatchController::class,'destroy'])->name('deleteDispatchedItem');
 
 });
