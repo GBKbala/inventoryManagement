@@ -95,7 +95,7 @@
 
          <li class="menu-item">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
-               <i class="menu-icon tf-icons bx bx-box"></i>
+               <i class="menu-icon tf-icons bx bx-male"></i>
                <div class="text-truncate" data-i18n="Users">Customers</div>
             </a>
             <ul class="menu-sub">
@@ -110,7 +110,7 @@
 
          <li class="menu-item">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
-               <i class="menu-icon tf-icons bx bx-box"></i>
+               <i class="menu-icon tf-icons bx bx-store"></i>
                <div class="text-truncate" data-i18n="Users">Suppliers</div>
             </a>
             <ul class="menu-sub">
@@ -121,10 +121,24 @@
                </li>
             </ul>
          </li>
+
+         <li class="menu-item">
+            <a href="javascript:void(0);" class="menu-link menu-toggle">
+               <i class="menu-icon tf-icons bx bx-package"></i>
+               <div class="text-truncate" data-i18n="Users">Purchased Items</div>
+            </a>
+            <ul class="menu-sub">
+               <li class="menu-item">
+                  <a href="{{ route('purchasedItems')}}" class="menu-link">
+                     <div class="text-truncate" data-i18n="List">List</div>
+                  </a>
+               </li>
+            </ul>
+         </li>
         
          <li class="menu-item">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
-               <i class="menu-icon tf-icons bx bx-box"></i>
+               <i class="menu-icon tf-icons bx bxs-truck"></i>
                <div class="text-truncate" data-i18n="Users">Dispatched Items</div>
             </a>
             <ul class="menu-sub">

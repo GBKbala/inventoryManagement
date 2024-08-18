@@ -7,6 +7,8 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\DispatchController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\SupplierController;
+use App\Http\Controllers\PurchaseController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -82,6 +84,14 @@ Route::middleware(['auth'])->group( function(){
     Route::get('/editSupplier/{id}', [SupplierController::class,'edit'])->name('editSupplier');
     Route::post('/updateSupplier',[SupplierController::class,'update'])->name('updateSupplier');
     Route::get('/deleteSupplier/{id}', [SupplierController::class,'destroy'])->name('deleteSupplier');
+
+
+    Route::get('/purchasedItems', [PurchaseController::class, 'index'])->name('purchasedItems');
+    Route::get('/getpurchasedItems', [PurchaseController::class,'getpurchasedItems'])->name('getpurchasedItems');
+    Route::post('storePurchasedItem', [PurchaseController::class,'store'])->name('storePurchasedItem');
+    Route::get('editPurchasedItem/{id}', [PurchaseController::class, 'edit'])->name('editPurchasedItem');
+    Route::post('updatePurchasedItem', [PurchaseController::class, 'update'])->name('updatePurchasedItem');
+    Route::get('deletePurchasedItem/{id}', [PurchaseController::class,'destroy'])->name('deletePurchasedItem');
 
 
 });
