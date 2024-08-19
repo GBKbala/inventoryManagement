@@ -226,7 +226,7 @@
     $('#addUser').click(function (){
         $('#userModal').modal('show');
         $('.modalTitle').text('Add User');
-
+        $('#submit').attr('disabled', false);
         $('#submit').val('Submit');
         $('input').val('');
 

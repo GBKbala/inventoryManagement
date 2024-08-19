@@ -99,7 +99,7 @@
                </div>
 
                <div class="col-12">
-                  <label class="form-label" for="quantity">Quanity In Stock</label>
+                  <label class="form-label" for="quantity">Quanity</label>
                   <input type="number" class="form-control" id="quantity" name="quantity" placeholder="Enter Quantity" />
                   <div class="quantity error"></div>
                </div>

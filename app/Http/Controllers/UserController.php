@@ -28,7 +28,7 @@ class UserController extends Controller
 
     public function storeUser(Request $request){
 
-        if (!Gate::allows('store-user')) {
+        if (!Gate::allows('add-user')) {
             return redirect('dashboard')->with('error','Unauthorized access');
         }
     
